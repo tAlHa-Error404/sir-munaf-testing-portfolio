@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PASHA CEC Election 2024 - Munaf Majeed</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Header Navigation Styles */
+        .header-navbar {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .header-navbar.scrolled {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: #dc3545;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: #dc3545 !important;
+            font-weight: 500;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes glowText {
+            0% { text-shadow: 0 0 0 rgba(220, 53, 69, 0); }
+            50% { text-shadow: 0 0 10px rgba(220, 53, 69, 0.5); }
+            100% { text-shadow: 0 0 0 rgba(220, 53, 69, 0); }
+        }
+
+        .candidate-info {
+            padding: 40px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .candidate-info h1 {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .candidate-info h3 {
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+            animation: glowText 3s infinite;
+        }
+
+        .candidate-info ul li {
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        .candidate-info ul li:nth-child(1) { animation-delay: 0.4s; }
+        .candidate-info ul li:nth-child(2) { animation-delay: 0.6s; }
+        .candidate-info ul li:nth-child(3) { animation-delay: 0.8s; }
+        .candidate-info ul li:nth-child(4) { animation-delay: 1.0s; }
+        .candidate-info ul li:nth-child(5) { animation-delay: 1.2s; }
+
+        .candidate-info .video-container {
+            opacity: 0;
+            animation: slideInRight 1s ease-out 0.4s forwards;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .candidate-info .video-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .manifesto-point {
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .manifesto-point:hover {
+            transform: translateY(-5px);
+        }
+        
+        .vision-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .vision-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .vision-box h4 {
+            color: #dc3545;
+            margin-bottom: 15px;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #dc3545;
+            border-radius: 2px;
+        }
+
+        .how-section {
+            background: #f8f9fa;
+            padding: 60px 0;
+        }
+
+        /* New Gallery Item Styles */
+        .gallery-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            padding: 0.75rem;
+            border-radius: 12px;
+        }
+
+        .gallery-item:hover {
+            background-color: #f1f3f5;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .gallery-item .arrow {
+            font-size: 6rem;
+            color: #dc3545;
+            font-weight: 700; /* Bolder arrow */
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .arrow {
+            transform: translateX(5px); /* Move arrow on hover */
+        }
+
+        .gallery-item .gallery-image {
+            width: 180px; /* Reduced size */
+            height: 110px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        }
+
+        .gallery-item .gallery-text .gallery-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #212529;
+            margin-bottom: 0.25rem;
+        }
+
+        .gallery-item .gallery-text .gallery-description {
+            font-size: 0.9rem;
+            color: #6c757d; /* Muted color */
+        }
+
+        /* Industry Representation Specific Styles */
+        .industry-list .gallery-item:nth-child(-n+2) .gallery-title {
+            font-size: 1.2rem;
+        }
+
+        /* Responsive Behavior */
+        @media (max-width: 768px) {
+            .gallery-item {
+                flex-direction: column; /* Stack vertically */
+                text-align: center; /* Center align text */
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .gallery-item .arrow {
+                display: none; /* Hide arrow on mobile for cleaner look */
+            }
+            
+            .pasha-main-row {
+                flex-direction: column;
+            }
+            
+            .border-end-md {
+                border-right: none !important;
+                border-bottom: 1px solid #dee2e6;
+                padding-bottom: 2rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light header-navbar sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Muhammad Munaf Majeed</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#manifesto">Manifesto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#industry">Industry</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#vision">Vision</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="candidate-info">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1>Munaf Majeed</h1>
+                    <h3 class="text-danger mb-4">PASHA CEC Elections 2024</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">• IT Professional with over 25 years of experience with international and local clients.</li>
+                        <li class="mb-2">• Convener of the Cyber crimes and Security committee Federation of Pakistan Chambers of Commerce & Industry (FPCCI) 2024-2025</li>
+                        <li class="mb-2">• Member of the Industry Engagement Committee P@SHA</li>
+                        <li class="mb-2">• Co-Chair of the Cyber Security Committee P@SHA</li>
+                        <li class="mb-2">• Passionate about sharing expertise and uplifting the P@SHA community.</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/7DytVajpGjA" title="PASHA CEC Election" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Two-Column Gallery Section Divider -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row g-0 pasha-main-row align-items-stretch" style="position:relative;">
+                <!-- Manifesto Gallery Left Side -->
+                <div class="col-md-6 p-3 pe-md-5 border-end-md d-flex flex-column">
+                    <h2 class="section-title mb-4">Manifesto</h2>
+                    <div class="manifesto-list flex-grow-1">
+                        <a href="https://www.youtube.com/watch?v=_xe7In2Noj0" target="_blank" class="text-decoration-none">
+                            <div class="gallery-item">
+                                <span class="arrow">&#8594;</span>
+                                <img src="https://img.youtube.com/vi/_xe7In2Noj0/hqdefault.jpg" alt="Digital Transformation" class="gallery-image">
+                                <div class="gallery-text">
+                                    <div class="gallery-title">Digital Transformation</div>
+                                    <div class="gallery-description">Driving innovation and efficiency across industries by integrating cutting-edge digital technologies.</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=dCkHhr4hS-E" target="_blank" class="text-decoration-none">
+                            <div class="gallery-item">
+                                <span class="arrow">&#8594;</span>
+                                <img src="https://img.youtube.com/vi/dCkHhr4hS-E/hqdefault.jpg" alt="Cybersecurity for All" class="gallery-image">
+                                <div class="gallery-text">
+                                    <div class="gallery-title">Cybersecurity for All</div>
+                                    <div class="gallery-description">Strengthening digital defenses for businesses of all sizes, ensuring a secure and resilient digital ecosystem.</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=mwyotbr5WmM" target="_blank" class="text-decoration-none">
+                            <div class="gallery-item">
+                                <span class="arrow">&#8594;</span>
+                                <img src="https://img.youtube.com/vi/mwyotbr5WmM/hqdefault.jpg" alt="Talent Development" class="gallery-image">
+                                <div class="gallery-text">
+                                    <div class="gallery-title">Talent Development</div>
+                                    <div class="gallery-description">Nurturing the next generation of tech leaders through comprehensive training and mentorship programs.</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=C7K70m-IOX8" target="_blank" class="text-decoration-none">
+                            <div class="gallery-item">
+                                <span class="arrow">&#8594;</span>
+                                <img src="https://img.youtube.com/vi/C7K70m-IOX8/hqdefault.jpg" alt="Women in Tech" class="gallery-image">
+                                <div class="gallery-text">
+                                    <div class="gallery-title">Women in Tech</div>
+                                    <div class="gallery-description">Empowering and promoting female participation in the IT sector to foster diversity and innovation.</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="manifesto-full.html" class="btn btn-outline-primary px-5">See More</a>
+                    </div>
+                </div>
+                <!-- Industry Representation Gallery Right Side -->
+                <div class="col-md-6 p-3 ps-md-5 d-flex flex-column">
+                    <h2 class="section-title mb-4">Industry Representation</h2>
+                    <div class="industry-list flex-grow-1">
+                        <div class="gallery-item">
+                            <span class="arrow">&#8594;</span>
+                            <img src="https://placehold.co/220x130?text=SMEs" alt="SMEs Industry" class="gallery-image">
+                            <div class="gallery-text">
+                                <div class="gallery-title">SMEs & Corporate Balance</div>
+                                <div class="gallery-description">Advocating for policy equality and tailored resources for all company sizes.</div>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <span class="arrow">&#8594;</span>
+                            <img src="https://placehold.co/220x130?text=Govt" alt="Gov Collaboration" class="gallery-image">
+                            <div class="gallery-text">
+                                <div class="gallery-title">Government Collaboration</div>
+                                <div class="gallery-description">Building bridges with government to shape IT policies and incentives.</div>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <span class="arrow">&#8594;</span>
+                            <img src="https://placehold.co/220x130?text=Member" alt="Member Advocacy" class="gallery-image">
+                            <div class="gallery-text">
+                                <div class="gallery-title">Member Advocacy</div>
+                                <div class="gallery-description">Addressing all member issues with transparency, speed, and diligence.</div>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <span class="arrow">&#8594;</span>
+                            <img src="https://placehold.co/220x130?text=Growth" alt="IT Sector Growth" class="gallery-image">
+                            <div class="gallery-text">
+                                <div class="gallery-title">IT Sector Growth</div>
+                                <div class="gallery-description">Driving export growth, brand recognition, and skilled workforce expansion.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="industry-full.html" class="btn btn-outline-primary px-5">See More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision and Plans Section -->
+    <section id="vision" class="how-section">
+        <div class="container">
+            <h2 class="section-title text-center">VISION AND PLAN</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="vision-box">
+                        <div class="video-container mb-3">
+                            <iframe src="https://www.youtube.com/embed/ZK8uaB4ZYAI" title="Managing P@SHA Duties" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4> Responsibilities</h4>
+                        <p>How will you manage P@SHA duties with your professional responsibilities?</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="vision-box">
+                        <div class="video-container mb-3">
+                            <iframe src="https://www.youtube.com/embed/4F-F1y-gLWo" title="Committee Alignment" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4>Committee Alignment</h4>
+                        <p>How will you keep specialized committees aligned with P@SHA goals?</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="vision-box">
+                        <div class="video-container mb-3">
+                            <iframe src="https://www.youtube.com/embed/m-UJx0TfBQw" title="Open Communication" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4>Transparency</h4>
+                        <p>How will you maintain open communication and transparency?</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="vision-box">
+                        <div class="video-container mb-3">
+                            <iframe src="https://www.youtube.com/embed/s1RiJv1zs5s" title="Event Participation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4>Event Participation</h4>
+                        <p>How will you boost participation in P@SHA events and conferences?</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="vision-box">
+                        <div class="video-container mb-3">
+                            <iframe src="https://www.youtube.com/embed/IMc0Wlr8Zjs" title="Government Relations" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4>Government Relations</h4>
+                        <p>How will you work with the government to secure favorable policies for P@SHA?</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="vision-box">
+                        <div class="video-container mb-3">
+                            <iframe src="https://www.youtube.com/embed/MDbZG3UjBDs" title="Strategic Balance" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4>Strategic Balance</h4>
+                        <p>How will you balance immediate results with long-term strategies?</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="vision-box">
+                        <div class="video-container mb-3">
+                            <iframe src="https://www.youtube.com/embed/AuRrphbZuTE" title="Problem Solving" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4>Challenge Resolution</h4>
+                        <p>Can you share a time when you personally solved a major challenge?</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="vision-box">
+                        <div class="video-container mb-3">
+                            <iframe src="https://www.youtube.com/embed/TAj5C2_Ne20" title="Member Concerns" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4>Member Concerns</h4>
+                        <p>How will you prioritize and address concerns raised by P@SHA members?</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="vision-box">
+                        <div class="video-container mb-3">
+                            <iframe src="https://www.youtube.com/embed/PunzJAVaiHo" title="SMEs and Corporate Balance" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4>Business Balance</h4>
+                        <p>How will you balance the needs of SMEs & Corporate?</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="vision-box">
+                        <div class="video-container mb-3">
+                            <iframe src="https://www.youtube.com/embed/bTI-FpWypUs" title="Academic Contribution" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4>Academic Sector</h4>
+                        <p>How have you contributed to the academic sector?</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="vision-box">
+                        <div class="video-container mb-3">
+                            <iframe src="https://www.youtube.com/embed/-Xcpx4q7h_Q" title="Media Role" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4>Media Role</h4>
+                        <p>What role have you played in the media for IT awareness?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">Vote for Munaf Majeed - Leading From The Front</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">#VoteForMunaf</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Function to handle scroll spy and active nav links
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            function updateActiveLink() {
+                const scrollPosition = window.scrollY + 100; // Offset for header height
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    const sectionId = section.getAttribute('id');
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        // Remove active class from all links
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        
+                        // Add active class to corresponding nav link
+                        const correspondingLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+                        if (correspondingLink) {
+                            correspondingLink.classList.add('active');
+                        }
+                    }
+                });
+            }
+
+            // Initial check for active section
+            updateActiveLink();
+
+            // Update active section on scroll
+            window.addEventListener('scroll', updateActiveLink);
+
+            // Smooth scrolling for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId !== '#') {
+                        const targetSection = document.querySelector(targetId);
+                        const headerOffset = 80; // Height of your fixed header
+                        const elementPosition = targetSection.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+
+        // Handle header background on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header-navbar');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

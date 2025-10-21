@@ -1,0 +1,134 @@
+/* Gallery Boxes Common Styles */
+.gallery-box {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.gallery-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.gallery-img {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+}
+
+.gallery-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-box:hover .gallery-img img {
+    transform: scale(1.1);
+}
+
+.gallery-content {
+    padding: 20px;
+}
+
+.gallery-content h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.gallery-content p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* Speaker Box Specific */
+.speaker-box .date-info {
+    color: #007bff;
+    font-size: 0.85rem;
+}
+
+.speaker-box .date-info i {
+    margin-right: 5px;
+}
+
+/* Event Box Specific */
+.event-box .event-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.event-box .event-info i {
+    width: 20px;
+    color: #007bff;
+}
+
+/* News Box Specific */
+.news-box .channel-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.news-box .air-date {
+    color: #dc3545;
+    font-size: 0.85rem;
+}
+
+.news-box .air-date i {
+    margin-right: 5px;
+}
+
+/* Conference Box Specific */
+.conference-box .conference-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.conference-box .conference-info i {
+    width: 20px;
+    color: #28a745;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .gallery-img {
+        height: 180px;
+    }
+    
+    .gallery-content {
+        padding: 15px;
+    }
+    
+    .gallery-content h4 {
+        font-size: 1rem;
+    }
+}
+
+/* Loading Animation */
+.gallery-box.loading {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.gallery-box.loaded {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
