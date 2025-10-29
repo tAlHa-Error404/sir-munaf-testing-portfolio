@@ -1,0 +1,14 @@
+# OS/Editor junk
+.DS_Store
+Thumbs.db
+
+# Archives and backups
+*.zip
+*.rar
+
+# Environment and logs
+.env
+*.log
+
+# Node (if added later)
+node_modules/

@@ -1,0 +1,114 @@
+.unified-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex; /* Change to flex for horizontal layout */
+    flex-direction: row; /* Arrange items in a row */
+    align-items: center; /* Vertically center items */
+    padding: 1.5rem; /* Add padding to the card itself */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    position: relative;
+}
+
+.unified-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-arrow {
+    flex-shrink: 10; /* Prevent arrow from shrinking */
+    width: 30%; /* Covering 30% of the card's width */
+    height: 100px; /* Fixed height, adjust as needed */
+    background-color: red;
+    clip-path: polygon(0% 50%, 100% 0%, 100% 100%); /* Right-pointing triangle */
+    margin-right: 1.5rem; /* Space between arrow and image */
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease;
+}
+
+.unified-card:hover .card-arrow {
+    opacity: 1; /* Visible on hover */
+}
+
+.card-image {
+    flex-grow: 1; /* Allow image to take available space */
+    max-width: 40%; /* Adjust as needed, leaving space for arrow and heading */
+    height: 200px; /* Fixed height for consistency */
+    object-fit: cover;
+    border-radius: 0.25rem; /* Keep some border-radius */
+    transition: filter 0.3s ease;
+}
+
+.unified-card:hover .card-image {
+    filter: brightness(0.7); /* Darken image on hover */
+}
+
+.card-content-wrapper {
+    flex-shrink: 0; /* Prevent content wrapper from shrinking */
+    margin-left: 1.5rem; /* Space between image and heading */
+    text-align: right; /* Align heading to the right */
+}
+
+.card-heading {
+    font-size: 2.5rem; /* Larger font size for heading */
+    color: #333;
+    margin-bottom: 0; /* Remove bottom margin */
+    line-height: 1.2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .unified-card {
+        flex-direction: column; /* Stack elements vertically on smaller screens */
+        text-align: center;
+    }
+
+    .unified-card .card-arrow {
+        margin: 0 auto 1rem auto; /* Center arrow and add bottom margin */
+        width: 15%; /* Adjust width for smaller screens */
+        height: 70px;
+    }
+
+    .unified-card .card-image {
+        max-width: 80%; /* Adjust image size for smaller screens */
+        margin-bottom: 1rem;
+    }
+
+    .unified-card .card-content-wrapper {
+        margin-left: 0;
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    .unified-card .card-heading {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .unified-card {
+        padding: 1rem;
+    }
+
+    .unified-card .card-arrow {
+        width: 15%;
+        height: 50px;
+    }
+
+    .unified-card .card-heading {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .unified-card .card-arrow {
+        width: 15%;
+        height: 40px;
+    }
+
+    .unified-card .card-heading {
+        font-size: 1.5rem;
+    }
+}

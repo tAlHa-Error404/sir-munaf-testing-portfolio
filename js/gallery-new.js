@@ -3,24 +3,28 @@ const galleryData = {
     speaker: [
         {
             id: 1,
+            name: 'John Doe',
             title: 'Educational About Threats',
             description: 'Understanding cybersecurity fundamentals',
             image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800'
         },
         {
             id: 2,
+            name: 'Jane Smith',
             title: 'Process of Threats',
             description: 'Deep dive into cyber threats',
             image: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800'
         },
         {
             id: 3,
+            name: 'Peter Jones',
             title: 'Prevention of Threats',
             description: 'Best practices for threat prevention',
             image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800'
         },
         {
             id: 4,
+            name: 'Alice Brown',
             title: 'Awareness of Threats',
             description: 'Building cybersecurity awareness',
             image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800'
@@ -130,49 +134,68 @@ const galleryData = {
 };
 
 // Show gallery items based on category
+const itemsPerPage = 4; // Number of items to show initially
+let currentCategory = '';
+let displayedItems = 0;
+
 function showGalleryItems(category) {
+    currentCategory = category;
     const container = document.getElementById('galleryItems');
     const items = galleryData[category];
-    
+    const seeMoreBtn = document.getElementById('seeMoreBtn');
+
     // Clear existing content
     container.innerHTML = '';
-    
-    // Add new items
-    items.forEach(item => {
-        const col = document.createElement('div');
-        col.className = 'col-lg-3 col-md-6 mb-4';
-        
-        let content = '';
-        switch(category) {
-            case 'speaker':
-                content = createSpeakerBox(item);
-                break;
-            case 'events':
-                content = createEventBox(item);
-                break;
-            case 'news-channel':
-                content = createNewsBox(item);
-                break;
-            case 'conferences':
-                content = createConferenceBox(item);
-                break;
-        }
-        
-        col.innerHTML = content;
-        container.appendChild(col);
+    displayedItems = 0;
+
+    // Add initial items
+    items.slice(0, itemsPerPage).forEach(item => {
+        appendGalleryItem(container, item, category);
+        displayedItems++;
     });
+
+    // Show/hide "See More" button
+    if (items.length > itemsPerPage) {
+        seeMoreBtn.classList.remove('d-none');
+    } else {
+        seeMoreBtn.classList.add('d-none');
+    }
+}
+
+function appendGalleryItem(container, item, category) {
+    const col = document.createElement('div');
+    col.className = 'col-lg-6 col-md-6 mb-4'; // Changed to col-lg-6 for two cards per row
+
+    let content = '';
+    switch(category) {
+        case 'speaker':
+            content = createSpeakerBox(item);
+            break;
+        case 'events':
+            content = createEventBox(item);
+            break;
+        case 'news-channel':
+            content = createNewsBox(item);
+            break;
+        case 'conferences':
+            content = createConferenceBox(item);
+            break;
+    }
+
+    col.innerHTML = content;
+    container.appendChild(col);
 }
 
 // Create Speaker Box
 function createSpeakerBox(item) {
     return `
-        <div class="gallery-box speaker-box">
-            <div class="gallery-img">
-                <img src="${item.image}" alt="${item.title}" class="img-fluid">
-            </div>
-            <div class="gallery-content">
-                <h4>${item.title}</h4>
-                <p>${item.description}</p>
+        <div class="unified-card speaker-box">
+            <div class="card-arrow"></div>
+            <img src="${item.image}" alt="${item.title}" class="card-image">
+            <div class="card-content-wrapper">
+                <div class="text-muted small">${item.name}</div>
+                <h4 class="card-heading">${item.title}</h4>
+                <p class="card-description">${item.description}</p>
             </div>
         </div>
     `;
@@ -181,13 +204,12 @@ function createSpeakerBox(item) {
 // Create Event Box
 function createEventBox(item) {
     return `
-        <div class="gallery-box event-box">
-            <div class="gallery-img">
-                <img src="${item.image}" alt="${item.title}" class="img-fluid">
-            </div>
-            <div class="gallery-content">
-                <h4>${item.title}</h4>
-                <p>${item.description}</p>
+        <div class="unified-card event-box">
+            <div class="card-arrow"></div>
+            <img src="${item.image}" alt="${item.title}" class="card-image">
+            <div class="card-content-wrapper">
+                <h4 class="card-heading">${item.title}</h4>
+                <p class="card-description">${item.description}</p>
                 <div class="event-info">
                     <div><i class="fas fa-map-marker-alt"></i> ${item.venue}</div>
                 </div>
@@ -200,31 +222,29 @@ function createEventBox(item) {
 function createNewsBox(item) {
     if (item.youtubeLink) {
         return `
-            <div class="gallery-box news-box video-news-box">
-                <div class="gallery-img video-container">
-                    <iframe src="https://www.youtube.com/embed/${item.youtubeLink.split('v=')[1]}" 
-                            title="${item.title}" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen></iframe>
-                    <div class="channel-badge">${item.channel}</div>
-                </div>
-                <div class="gallery-content">
-                    <h4>${item.title}</h4>
-                    <p>${item.description}</p>
+            <div class="unified-card news-box video-news-box">
+                <div class="card-arrow"></div>
+                <iframe src="https://www.youtube.com/embed/${item.youtubeLink.split('v=')[1]}"
+                        title="${item.title}"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen class="card-image"></iframe>
+                <div class="card-content-wrapper">
+                    <h4 class="card-heading">${item.title}</h4>
+                    <p class="card-description">${item.description}</p>
+                    <div class="channel-badge-content">${item.channel}</div>
                 </div>
             </div>
         `;
     } else {
         return `
-            <div class="gallery-box news-box">
-                <div class="gallery-img">
-                    <img src="${item.image}" alt="${item.title}" class="img-fluid">
-                    <div class="channel-badge">${item.channel}</div>
-                </div>
-                <div class="gallery-content">
-                    <h4>${item.title}</h4>
-                    <p>${item.description}</p>
+            <div class="unified-card news-box">
+                <div class="card-arrow"></div>
+                <img src="${item.image}" alt="${item.title}" class="card-image">
+                <div class="card-content-wrapper">
+                    <h4 class="card-heading">${item.title}</h4>
+                    <p class="card-description">${item.description}</p>
+                    <div class="channel-badge-content">${item.channel}</div>
                 </div>
             </div>
         `;
@@ -234,13 +254,12 @@ function createNewsBox(item) {
 // Create Conference Box
 function createConferenceBox(item) {
     return `
-        <div class="gallery-box conference-box">
-            <div class="gallery-img">
-                <img src="${item.image}" alt="${item.title}" class="img-fluid">
-            </div>
-            <div class="gallery-content">
-                <h4>${item.title}</h4>
-                <p>${item.description}</p>
+        <div class="unified-card conference-box">
+            <div class="card-arrow"></div>
+            <img src="${item.image}" alt="${item.title}" class="card-image">
+            <div class="card-content-wrapper">
+                <h4 class="card-heading">${item.title}</h4>
+                <p class="card-description">${item.description}</p>
                 <div class="conference-info">
                     <div><i class="fas fa-location-dot"></i> ${item.venue}</div>
                     <div><i class="fas fa-calendar-alt"></i> ${item.date}</div>
@@ -254,7 +273,7 @@ function createConferenceBox(item) {
 document.addEventListener('DOMContentLoaded', () => {
     // Show speaker content by default
     showGalleryItems('speaker');
-    
+
     // Add click handlers to buttons
     document.querySelectorAll('.filter-btn').forEach(button => {
         button.addEventListener('click', (e) => {
@@ -262,13 +281,29 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            
+
             // Add active class to clicked button
             button.classList.add('active');
-            
+
             // Show corresponding items
             const category = button.dataset.category;
             showGalleryItems(category);
         });
+    });
+
+    // Add click handler for "See More" button
+    document.getElementById('seeMoreBtn').addEventListener('click', () => {
+        const container = document.getElementById('galleryItems');
+        const items = galleryData[currentCategory];
+        const seeMoreBtn = document.getElementById('seeMoreBtn');
+
+        // Append remaining items
+        for (let i = displayedItems; i < items.length; i++) {
+            appendGalleryItem(container, items[i], currentCategory);
+        }
+        displayedItems = items.length;
+
+        // Hide "See More" button
+        seeMoreBtn.classList.add('d-none');
     });
 });

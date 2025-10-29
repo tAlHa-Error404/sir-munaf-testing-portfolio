@@ -69,6 +69,25 @@
 .industry-box:hover .industry-hover {
 }
 
+@media (max-width: 768px) {
+    .industry-box {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .industry-image {
+        height: 150px;
+    }
+
+    .industry-box h4 {
+        font-size: 1.1rem;
+    }
+
+    .industry-box p {
+        font-size: 0.9rem;
+    }
+}
+
 .industry-hover ul {
     list-style: none;
     padding: 0;
@@ -112,6 +131,46 @@
     color: #4a5568;
     font-weight: bold;
     margin-right: 0.5rem;
+}
+
+/* Navigation Styles */
+.header-navbar {
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-navbar .nav-link {
+    color: #2d3748;
+    font-weight: 500;
+    padding: 1rem 0;
+    transition: color 0.3s ease;
+}
+
+.header-navbar .nav-link:hover {
+    color: #dc3545;
+}
+
+.header-brand {
+    color: #2d3748;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .header-navbar .container {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .header-navbar .d-flex {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .header-brand {
+        order: -1;
+    }
 }
 
 /* Journey Section Styles */
@@ -301,25 +360,29 @@
 .achievement-side.left:hover .achievement-dialog.right {
     opacity: 1;
     visibility: visible;
-    right: -100%;
-    transform: translateX(-50%);
+    left: 0; /* Animate from left to right */
+    transform: translateX(0);
+    right: auto; /* Ensure right is not interfering */
 }
 
 .achievement-side.right:hover .achievement-dialog.left {
     opacity: 1;
     visibility: visible;
-    left: -100%;
-    transform: translateX(50%);
+    right: 0; /* Animate from right to left, and position on right */
+    transform: translateX(0);
+    left: auto; /* Ensure left is not interfering */
 }
 
-.achievement-dialog.right {
-    right: -50%;
-    transform: translateX(-30%);
+.achievement-dialog.right { /* Initial state for dialog in left card */
+    left: -100%; /* Start off-screen to the left */
+    right: auto;
+    transform: translateX(0);
 }
 
-.achievement-dialog.left {
-    left: -50%;
-    transform: translateX(30%);
+.achievement-dialog.left { /* Initial state for dialog in right card */
+    right: -100%; /* Start off-screen to the right */
+    left: auto;
+    transform: translateX(0);
 }
 
 .achievement-image-container {
@@ -420,6 +483,20 @@
     }
 }
 
+@media (max-width: 576px) {
+    .achievement-card {
+        height: 200px;
+    }
+
+    .achievement-dialog h4 {
+        font-size: 1.2rem;
+    }
+
+    .achievement-dialog p {
+        font-size: 0.9rem;
+    }
+}
+
 .achievement-hidden {
     display: none;
 }
@@ -507,8 +584,9 @@
 
 /* Enhanced Header Styles */
 .header-navbar {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
 }
 
 .header-brand {
@@ -568,6 +646,31 @@
     font-size: 1.05rem;
   }
 }
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+}
+
+.header-left .nav-item:not(:last-child) {
+    margin-right: 15px;
+}
+
+.header-right .nav-item:not(:first-child) {
+    margin-left: 15px;
+}
+
+@media (max-width: 991.98px) {
+    .header-left, .header-right {
+        display: none;
+    }
+    .navbar-collapse {
+        justify-content: center !important;
+    }
+    .navbar-nav .nav-item {
+        text-align: center;
+    }
+}
 /* ========================================
    Custom CSS for Sir Munaf Majeed Portfolio
    Primary Color: #C21E25
@@ -597,6 +700,32 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text-dark);
     line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll on smaller screens */
+}
+
+.container,
+.container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* General responsive font sizes */
+@media (max-width: 992px) {
+    html {
+        font-size: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 85%;
+    }
+}
+
+@media (max-width: 576px) {
+    html {
+        font-size: 80%;
+    }
 }
 
 /* === TOP BANNER === */
@@ -672,6 +801,34 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        height: 70vh;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section {
+        height: 60vh;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
 }
 
 .video-background {
@@ -854,45 +1011,273 @@ section img:hover {
 }
 
 /* === GALLERY === */
-.gallery-item {
+.gallery-item-wrapper {
     position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between card and arrow */
+}
+
+.gallery-card {
+    background-color: #ff0000; /* Temporary bright red background for testing */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     overflow: hidden;
-    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
 
-.gallery-item img {
+.gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.gallery-card-header {
+    padding: 20px 25px 10px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #eee;
+}
+
+.gallery-card-header h4 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0;
+    line-height: 1.3;
+}
+
+.gallery-card-body {
+    padding: 15px 25px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.gallery-card-body img {
     width: 100%;
-    height: 300px;
+    height: 200px; /* Fixed height for images */
     object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
     transition: transform 0.3s ease;
 }
 
-.gallery-overlay {
+.gallery-card:hover .gallery-card-body img {
+    transform: scale(1.03);
+}
+
+.gallery-card-body p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.gallery-card-arrow-outside {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px; /* Increased size */
+    height: 60px; /* Increased size */
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    color: white;
+    font-size: 1.8rem; /* Increased icon size */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    flex-shrink: 0; /* Prevent arrow from shrinking */
+}
+
+.gallery-card-arrow-outside:hover {
+    background-color: var(--primary-dark);
+    transform: translateX(5px);
+}
+
+/* Responsive adjustments for gallery card */
+@media (max-width: 992px) {
+    .gallery-item-wrapper {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .gallery-card-arrow-outside {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        transform: rotate(90deg); /* Rotate arrow for vertical layout */
+    }
+
+    .gallery-card-arrow-outside:hover {
+        transform: rotate(90deg) translateY(5px);
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-card-header h4 {
+        font-size: 1.2rem;
+    }
+
+    .gallery-card-body img {
+        height: 180px;
+    }
+
+    .gallery-card-body p {
+        font-size: 0.9rem;
+    }
+
+    .gallery-card-arrow-outside {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-card-header {
+        padding: 15px 20px 8px;
+    }
+
+    .gallery-card-header h4 {
+        font-size: 1.1rem;
+    }
+
+    .gallery-card-body {
+        padding: 10px 20px 20px;
+    }
+
+    .gallery-card-body img {
+        height: 150px;
+    }
+
+    .gallery-card-body p {
+        font-size: 0.85rem;
+    }
+
+    .gallery-card-arrow-outside {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+}
+
+.content-section {
+    padding: 3rem 0;
+    background-color: #ffffff;
+}
+
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.content-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-link {
+    text-decoration: none;
+    color: inherit;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.arrow-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.arrow-container i {
+    font-size: 1.2rem;
+    color: #333;
+    transition: transform 0.3s ease;
+}
+
+.manifesto-card:hover .arrow-container i {
+    transform: translateX(5px);
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+}
+
+.card-image {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(194, 30, 37, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
-.gallery-overlay i {
-    font-size: 3rem;
-    color: white;
+.manifesto-card:hover .card-image {
+    transform: scale(1.05);
 }
 
-.gallery-item:hover .gallery-overlay {
-    opacity: 1;
+.text-content {
+    padding: 1.5rem;
+    background: #fff;
+    flex-grow: 1;
 }
 
-.gallery-item:hover img {
-    transform: scale(1.1);
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #333;
+}
+
+.card-description {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .text-content {
+        padding: 1rem;
+    }
+    
+    .card-title {
+        font-size: 1.1rem;
+    }
+    
+    .card-description {
+        font-size: 0.9rem;
+    }
+    
+    .arrow-container {
+        width: 35px;
+        height: 35px;
+        top: 15px;
+        left: 15px;
+    }
 }
 
 /* === EVENT CARDS === */
@@ -920,48 +1305,220 @@ section img:hover {
     color: var(--primary-color);
 }
 
-/* === FOOTER === */
-.footer {
-    background-color: var(--primary-color);
-    color: white;
+@media (max-width: 768px) {
+    .event-card {
+        margin-bottom: 20px;
+    }
 }
 
-.footer h5 {
-    color: white;
-    margin-bottom: 1.5rem;
+@media (max-width: 576px) {
+    .event-card .card-title {
+        font-size: 1.1rem;
+    }
+
+    .event-card .card-text {
+        font-size: 0.9rem;
+    }
 }
 
-.footer a {
-    color: rgba(255, 255, 255, 0.8);
+/* === MANIFESTO CARDS === */
+.manifesto-grid {
+    padding: 2rem 0;
+}
+
+.manifesto-card {
+    display: block;
     text-decoration: none;
+    color: inherit;
     transition: all 0.3s ease;
 }
 
-.footer a:hover {
-    color: white;
-    padding-left: 5px;
+.manifesto-card:hover {
+    transform: translateY(-5px);
+    text-decoration: none;
+    color: inherit;
 }
 
-.social-icons a {
-    display: inline-block;
+.card-content {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.arrow-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
     width: 40px;
     height: 40px;
-    line-height: 40px;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
     transition: all 0.3s ease;
 }
 
-.social-icons a:hover {
-    background-color: white;
-    color: var(--primary-color) !important;
-    transform: translateY(-3px);
+.arrow-container i {
+    font-size: 1.2rem;
+    color: #333;
+    transition: transform 0.3s ease;
 }
 
-.contact-info i {
-    color: white;
+.manifesto-card:hover .arrow-container i {
+    transform: translateX(5px);
 }
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+}
+
+.card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.manifesto-card:hover .card-image {
+    transform: scale(1.05);
+}
+
+.text-content {
+    padding: 1.5rem;
+    background: #fff;
+    flex-grow: 1;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #333;
+}
+
+.card-description {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .text-content {
+        padding: 1rem;
+    }
+    
+    .card-title {
+        font-size: 1.1rem;
+    }
+    
+    .card-description {
+        font-size: 0.9rem;
+    }
+    
+    .arrow-container {
+        width: 35px;
+        height: 35px;
+        top: 15px;
+        left: 15px;
+    }
+}
+
+/* Digital Transformation Card Specific Styles */
+.digital-transformation-card {
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.digital-transformation-card .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.digital-transformation-card .image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 200px; /* Adjust as needed */
+    margin-bottom: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.digital-transformation-card .image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.digital-transformation-card .arrow-icon {
+    position: absolute;
+    right: -20px; /* Adjust to position outside the image initially */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 25px solid #FF0000; /* Red arrow */
+    opacity: 0;
+    transition: right 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.digital-transformation-card:hover .arrow-icon {
+    right: 10px; /* Position inside the image on hover */
+    opacity: 1;
+}
+
+.digital-transformation-card h4 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.digital-transformation-card p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .digital-transformation-card .image-wrapper {
+        max-width: 150px;
+    }
+
+    .digital-transformation-card h4 {
+        font-size: 1.5rem;
+    }
+
+    .digital-transformation-card p {
+        font-size: 1rem;
+    }
+}
+
 
 /* === MODAL === */
 .modal-content {
@@ -1087,6 +1644,109 @@ section img:hover {
         padding-left: 32px;
     }
 }
+
+/* === PAGE-SPECIFIC OVERRIDES === */
+/* Manifesto Full: solid red navbar with readable contrast */
+body.manifesto-full .navbar {
+    background-color: #FF0000 !important;
+}
+body.manifesto-full .navbar .navbar-brand,
+body.manifesto-full .navbar .nav-link {
+    color: #ffffff !important;
+}
+body.manifesto-full .navbar .nav-link:hover,
+body.manifesto-full .navbar .nav-link:focus,
+body.manifesto-full .navbar .nav-link.active {
+    color: #ffffff !important;
+    opacity: 0.85; /* subtle visual state while keeping contrast */
+}
+
+/* About section: ensure static industry work cards remain visible */
+section#about .gallery-item {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+}
+
+/* Industry Full: ensure gallery cards are visible without JS reveal */
+body.industry-full .gallery-item {
+    opacity: 1;
+    transform: none;
+}
+
+/* Industry Full: modern minimalist card component */
+body.industry-full .industry-card {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    overflow: hidden;
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+body.industry-full .industry-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.10);
+    border-color: #dee2e6;
+}
+body.industry-full .industry-card:focus-visible {
+    outline: 3px solid rgba(194, 30, 37, 0.35); /* var(--primary-color) with alpha */
+    outline-offset: 3px;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    body.industry-full .industry-card {
+        transition: none;
+    }
+    body.industry-full .industry-card:hover {
+        transform: none;
+    }
+}
+
+/* Media */
+body.industry-full .industry-card-media {
+    position: relative;
+    background: #f8f9fa;
+}
+body.industry-full .industry-card-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9; /* modern browsers */
+    object-fit: cover;
+}
+
+/* Content */
+body.industry-full .industry-card-content {
+    padding: 1rem 1rem 1.25rem 1rem;
+}
+body.industry-full .industry-card-title {
+    margin: 0 0 0.35rem 0;
+    font-size: 1.05rem;
+    line-height: 1.35;
+    font-weight: 600;
+    color: #2D3A4B; /* readable dark heading */
+}
+body.industry-full .industry-card-desc {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #6c757d;
+    line-height: 1.55;
+}
+
+/* Responsive tweaks */
+@media (min-width: 992px) {
+    body.industry-full .industry-card-title {
+        font-size: 1.1rem;
+    }
+}
+@media (max-width: 576px) {
+    body.industry-full .industry-card-content {
+        padding: 0.875rem 0.875rem 1rem 0.875rem;
+    }
+}
 .manifesto-list-item,
 .industry-card {
     cursor: pointer;
@@ -1102,3 +1762,6 @@ section img:hover {
     transition: max-height 0.55s cubic-bezier(.22,1,.36,1), opacity 0.33s;
     overflow: hidden;
 }
+
+
+

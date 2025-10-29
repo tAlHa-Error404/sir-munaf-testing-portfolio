@@ -19,6 +19,9 @@ function createGalleryItem(item) {
         case 'conference':
             content = createConferenceItem(item);
             break;
+        case 'unified-card':
+            content = createUnifiedCardItem(item);
+            break;
         default:
             content = createEventItem(item);
     }
@@ -28,6 +31,18 @@ function createGalleryItem(item) {
 }
 
 function createSpeakerItem(item) {
+// ... existing code ...
+function createUnifiedCardItem(item) {
+    return `
+        <div class="unified-card">
+            <div class="card-arrow"></div>
+            <img src="${item.image}" alt="${item.title}" class="card-image">
+            <h4 class="card-heading">${item.title}</h4>
+        </div>
+    `;
+}
+
+function formatDate(dateString) {
     return `
         <div class="speaker-card">
             <img src="${item.image}" class="lazy-image" alt="${item.title}" loading="lazy">

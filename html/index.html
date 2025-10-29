@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sir Munaf Majeed - Portfolio</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/styles.css?v=1708692695509650000">
+    <link rel="stylesheet" href="../css/gallery-animations.css">
+    <link rel="stylesheet" href="../css/gallery-boxes.css">
+ 
+    <style>
+        /* Manifesto-style Gallery Item (replicated from PASHA design) */
+        .gallery-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            padding: 0.75rem;
+            border-radius: 12px;
+        }
+
+        .gallery-item:hover {
+            background-color: #f1f3f5;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .gallery-item .arrow {
+            font-size: 6rem;
+            color: #dc3545;
+            font-weight: 700;
+            line-height: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .arrow {
+            transform: translateX(5px);
+        }
+
+        .gallery-item .gallery-image {
+            width: 180px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        }
+
+        .gallery-item .gallery-text .gallery-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 0.25rem;
+        }
+
+        .gallery-item .gallery-text .gallery-description {
+            font-size: 0.95rem;
+            color: #6c757d;
+        }
+
+        /* Responsive behavior consistent with PASHA manifesto */
+        @media (max-width: 768px) {
+            .gallery-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .gallery-item .arrow {
+                display: none;
+            }
+        }
+
+        /* Unified Card (Gallery Content Container in Project section) */
+        .unified-card {
+            display: flex;
+            align-items: stretch;
+            gap: 1.5rem;
+            padding: 1rem;
+            border: 2px solid #adb5bd; /* subtle contrast on light bg */
+            border-radius: 16px; /* enhanced radius */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease, border-color 0.3s ease, border-width 0.2s ease;
+            background: #fff; /* maintain clarity on mixed backgrounds */
+            min-height: 220px; /* increased height while keeping width */
+            position: relative; /* allow arrow absolute positioning */
+        }
+
+        .unified-card:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-3px);
+            border-color: #dc3545; /* accent on hover */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08), 0 0 0 4px rgba(220,53,69,0.10);
+        }
+
+        /* Focus state for interactive children (links, buttons, iframe) */
+        .unified-card:focus-within {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 4px rgba(220,53,69,0.18);
+        }
+
+        /* Two-column layout: left image (50%), right text (50%) */
+        .unified-card .card-image,
+        .unified-card .card-content-wrapper {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        /* Keep arrow visually on the left without affecting layout */
+        .unified-card .card-arrow {
+            position: absolute;
+            left: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+            height: auto;
+            background: none !important;
+            clip-path: none !important;
+            opacity: 1;
+        }
+
+        .unified-card .card-arrow::before {
+            content: "\2192"; /* → */
+            font-size: 6rem;
+            color: #dc3545;
+            font-weight: 700;
+            line-height: 1;
+            display: block;
+        }
+
+        .unified-card .card-image {
+            width: 100%;
+            height: 100%; /* fill left half vertically */
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative !important; /* reset any global absolute positioning */
+            z-index: 0; /* keep image below right-side content */
+            display: block;
+        }
+
+        .unified-card .card-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+            margin-left: 0;
+            padding-right: 0.5rem;
+            align-items: flex-start;
+            color: #212529;
+            z-index: 1;
+            position: relative;
+        }
+
+        .unified-card:hover .card-image {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        }
+
+        .unified-card .card-heading {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 0.35rem;
+            line-height: 1.25;
+            visibility: visible;
+            display: block;
+        }
+
+        .unified-card .card-description {
+            font-size: 0.95rem;
+            color: #6c757d;
+            margin: 0;
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .unified-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+                padding: 0.875rem;
+                min-height: 200px; /* responsive height */
+                border-width: 1.5px; /* thinner on small screens for balance */
+            }
+            .unified-card .card-image,
+            .unified-card .card-content-wrapper {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+            .unified-card .card-arrow { display: none; }
+        }
+
+        /* Thicker border on larger screens for clear definition */
+        @media (min-width: 992px) {
+            .unified-card { border-width: 3px; }
+        }
+
+        /* Responsive, elegant footer styling */
+        .footer {
+            background: linear-gradient(180deg, #0c1222 0%, #0a0f1c 100%);
+            color: #e5e7eb; /* light text */
+            border-top: 1px solid #1f2937;
+        }
+        .footer .footer-brand {
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+        .footer .footer-text,
+        .footer .contact-info li,
+        .footer .footer-link {
+            color: #94a3b8; /* slate-300 */
+        }
+        .footer .footer-link {
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+        .footer .footer-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.25s ease;
+        }
+        .footer .footer-link:hover { color: var(--primary-color); }
+        .footer .footer-link:hover::after { width: 100%; }
+
+        .footer .social-icons { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .footer .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid #334155; /* slate-700 */
+            color: #cbd5e1; /* slate-200 */
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+        .footer .social-icon:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+        .footer .social-icon:focus-visible {
+            outline: 3px solid rgba(194, 30, 37, 0.35);
+            outline-offset: 2px;
+        }
+
+        .footer .contact-info li i { color: var(--primary-color); }
+
+        .footer .newsletter-form .form-control {
+            background-color: #0f172a; /* slate-900 */
+            border-color: #1f2937; /* slate-800 */
+            color: #e5e7eb;
+        }
+        .footer .newsletter-form .form-control::placeholder { color: #94a3b8; }
+        .footer .newsletter-form .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(194, 30, 37, 0.2);
+            border-color: var(--primary-color);
+        }
+        .footer .newsletter-form .btn {
+            background: var(--primary-color);
+            border-color: var(--primary-dark);
+        }
+        .footer .newsletter-form .btn:hover { filter: brightness(0.95); }
+
+        .footer-divider { border-color: #1f2937; opacity: 0.6; }
+        .footer .copyright-text { color: #94a3b8; }
+
+        @media (max-width: 768px) {
+            .footer { text-align: center; }
+            .footer .social-icons { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="container-fluid">
+            <p class="mb-0 text-center">For training sessions, engagement & business related query - Email  at munaf@s4scorp.com</p>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->    
+    <nav class="navbar navbar-expand-lg navbar-light header-navbar sticky-top">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <ul class="navbar-nav header-left">
+                    <li class="nav-item">
+                        <a class="nav-link" href="pasha.html">P@SHA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#journey">Journey</a>
+                    </li>
+                </ul>
+                <a class="navbar-brand text-center header-brand m-0" href="#home">Muhammad Munaf Majeed</a>
+                <ul class="navbar-nav header-right">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Work Done</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#achievements">Achievement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav d-lg-none"> <!-- Hidden on large screens, visible on small for collapsed menu -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="pasha.html">Pasha</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#journey">Journey</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Work Done</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#achievements">Achievement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Video Background -->
+    <section id="home" class="hero-section">
+        <div class="video-background">
+            <video autoplay muted loop playsinline>
+                <source src="https://cdn.coverr.co/videos/coverr-business-meeting-in-modern-office-4614/1080p.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="container text-center">
+                <h1 class="display-3 fw-bold mb-4 animate-fade-in">Welcome to the World of Muhammad Munaf Mujeed</h1>
+                <p class="lead mb-5 animate-fade-in-delay">Inspiring growth, fostering leadership, and creating vision for a better tomorrow</p>
+                <a href="#journey" class="btn btn-primary btn-lg btn-custom">Explore More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me (My Story) Section -->
+    <section id="about-me" class="journey-section py-5">
+        <h2 class="section-title text-red text-center mb-5">Executive Profile: Mr. Mohammad Munaf</h2>
+        <div class="container">
+            <div class="row align-items-center gy-4">
+                <div class="col-lg-5">
+                    <img src="../images/IMG-20250326-WA0036 (1).jpg" alt="Muhammad Munaf Majeed" class="journey-image d-block mx-auto">
+                </div>
+                <div class="col-lg-7">
+                    <div class="journey-content">
+                        <p class="lead">
+Cybersecurity & Cloud Infrastructure Strategist | Chair at PASHA & FPCCI | National IT Advocate | CEC Member, PASHA
+                        <p class="lead">
+Mr. Mohammad Munaf is a recognized leader in cloud security, cybersecurity governance, and resilient digital infrastructure with 25+ years of experience advising banks, governments, and global enterprises. As Founder of Server4Sale and BlockDOS, he has delivered enterprise-grade DDoS protection, secure multi-cloud architectures, and digital risk consulting across BFSI, telecom, and public sectors.
+                        <div class="roles-section">
+                            <h4> My Core Area of expertise:</h4>
+                            <ul class="list-unstyled">
+                                <li>• National Cybersecurity Frameworks</li>
+                                <li>• Cybercrime Strategy & Infrastructure Defense</li>
+                                <li>• Digital Resilience for Small and Medium Enterprises (SMEs)</li>
+                                <li>• Technology Career and Startup Mentorship</li>
+                            </ul>
+                        </div>
+                        <p class="lead mb-0">
+Whether you represent a policy-making body, enterprise, academic institution, or emerging tech startup, I welcome opportunities for collaboration, advisory engagements, and knowledge-sharing sessions.
+
+Together, we can build a safer, more resilient digital Pakistan.                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section (placed immediately after Hero) -->
+    <section id="journey" class="journey-section py-5">
+        <h2 class="section-title text-red text-center mb-5">Journey of Muhammad Munaf Majeed</h2>
+        <div class="container">
+            <div class="row align-items-center gy-4">
+                <div class="col-lg-5">
+                    <img src="../images/CXO Meetup 2.jpg" alt="CXO Meetup 2" class="journey-image d-block mx-auto">
+                </div>
+                <div class="col-lg-7">
+                    <div class="journey-content">
+                        <p class="lead">
+With a legacy spanning over three decades, Mohammad Munaf Majeed has played a pivotal role in shaping Pakistan’s cybersecurity landscape — combining technical mastery, policy leadership, and a lifelong dedication to national digital growth. His professional journey reflects continuous innovation, service, and mentorship.                        </p>
+                        <p class="lead">
+                            As the Founder and CEO of Server4Sale, I've grown a reputation for delivering enterprise-grade cybersecurity with local agility—setting a benchmark for 30-minute resolution times in critical response scenarios.
+                        </p>
+                        <div class="roles-section">
+                            <h4>Career Timeline & Key Milestones :</h4>
+                            <ul class="list-unstyled">
+                                <li>• 1989 -  Beginnings in Technology </li>
+                                <li>• 1998 - Defining Moment in Cyber Defense</li>
+                                <li>• 2003 - Founding Server4Sale </li>
+                                <li>• 2005 - Expansion into Global Markets</li>
+                                <li>• CEC Member, P@SHA (Pakistan Software Houses Association for IT & ITES)</li>
+                                <li>• Chair, Cybersecurity and Cloud Committees at P@SHA</li>
+                                <li>• Chair, Cybercrime & Security Committee at FPCCI</li>
+                                <li>• Co-Chair, Industry Engagement Committee at P@SHA</li>
+                            </ul>
+                        </div>
+                        <p class="lead mb-0">
+Driven by a passion for technological advancement and knowledge sharing, Mohammad Munaf Majeed continues to contribute to Pakistan’s digital transformation through thought leadership, policy influence, and enterprise innovation. His journey remains a testament to what leadership rooted in purpose and integrity can achieve in the digital age.                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    
+    <!-- Work Done for Industry Section -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-red text-center mb-5">Work Done for Industry</h2>
+            <div class="row g-4">
+                <!-- Cybersecurity Leadership -->
+                <div class="col-lg-6 col-md-6">
+                    <div class="gallery-item">
+                        <span class="arrow">&#8594;</span>
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800" alt="Cybersecurity" class="gallery-image">
+                        <div class="gallery-text">
+                            <div class="gallery-title">Cybersecurity Leadership</div>
+                            <div class="gallery-description">I build smart systems and fast response plans so organizations can bounce back from threats—without breaking a sweat.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Policy & Digital Rules -->
+                <div class="col-lg-6 col-md-6">
+                    <div class="gallery-item">
+                        <span class="arrow">&#8594;</span>
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800" alt="Policy Making" class="gallery-image">
+                        <div class="gallery-text">
+                            <div class="gallery-title">Advocacy & Policy Engagement</div>
+                            <div class="gallery-description">I help write the cybersecurity playbook for Pakistan. VPNs, frameworks, internet safety. I'm in those rooms, asking the big questions.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mentorship -->
+                <div class="col-lg-6 col-md-6">
+                    <div class="gallery-item">
+                        <span class="arrow">&#8594;</span>
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800" alt="Mentorship" class="gallery-image">
+                        <div class="gallery-text">
+                            <div class="gallery-title">Mentorship</div>
+                            <div class="gallery-description">I guide the next generation—students, startups, pros—so they don't fall into the same traps we did back in the day.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Industry Engagement -->
+                <div class="col-lg-6 col-md-6">
+                    <div class="gallery-item">
+                        <span class="arrow">&#8594;</span>
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800" alt="Industry Engagement" class="gallery-image">
+                        <div class="gallery-text">
+                            <div class="gallery-title">Media & Public Engagement</div>
+                            <div class="gallery-description">Leading initiatives to foster collaboration between industry stakeholders and drive innovation in the IT sector.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technology Innovation -->
+                <div class="col-lg-6 col-md-6">
+                    <div class="gallery-item">
+                        <span class="arrow">&#8594;</span>
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800" alt="Digital Transformation" class="gallery-image">
+                        <div class="gallery-text">
+                            <div class="gallery-title">Digital Transformation</div>
+                            <div class="gallery-description">Driving innovation and efficiency across industries by integrating cutting-edge digital technologies.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Local Solutions -->
+                <div class="col-lg-6 col-md-6">
+                    <div class="gallery-item">
+                        <span class="arrow">&#8594;</span>
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800" alt="Local Solutions" class="gallery-image">
+                        <div class="gallery-text">
+                            <div class="gallery-title">Local Solutions, Global Quality</div>
+                            <div class="gallery-description">Through Server4Sale, we deliver top-notch cybersecurity with local insight. It's fast, it's effective, and it just works.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-5">
+        <h2 class="section-title text-red text-center mb-5">Achievements</h2>
+        <div class="container">
+            <!-- First Row -->
+            <div class="achievement-pair">
+                <div class="achievement-side left">
+                    <div class="achievement-card">
+                        <div class="achievement-image-container">
+                            <img src="https://images.unsplash.com/photo-1569705460033-cfaa4bf9f822?w=600" class="achievement-image" alt="Award of Excellence">
+                            <h3 class="achievement-title">Chair - Cybersecurity Committee, P@SHA</h3>
+                        </div>
+                    </div>
+                    <div class="achievement-dialog right">
+                        <h4>Chair - Cybersecurity Committee, P@SHA</h4>
+                        <p>Leading P@SHA’s Cybersecurity Committee to strengthen Pakistan’s digital resilience by promoting industry collaboration, shaping national cybersecurity policies, and driving initiatives that enhance awareness, innovation, and best practices across the tech ecosystem.</p>
+                    </div>
+                </div>
+                
+                <div class="achievement-side right">
+                    <div class="achievement-card">
+                        <div class="achievement-image-container">
+                            <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600" class="achievement-image" alt="Leadership Recognition">
+                            <h3 class="achievement-title">Chairperson – Cybersecurity Committee, FPCCI</h3>
+                        </div>
+                    </div>
+                    <div class="achievement-dialog left">
+                        <h4>Chairperson – Cybersecurity Committee, FPCCI</h4>
+                        <p>Overseeing the FPCCI Cybersecurity Committee to advance national cybersecurity readiness, support digital transformation in businesses, and advocate for strong security standards and policies to protect Pakistan’s economic and technological interests.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Row -->
+            <div class="achievement-pair">
+                <div class="achievement-side left">
+                    <div class="achievement-card">
+                        <div class="achievement-image-container">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600" class="achievement-image" alt="Innovation Award">
+                            <h3 class="achievement-title">Chair – Cloud & Digital Services Committee, P@SHA</h3>
+                        </div>
+                    </div>
+                    <div class="achievement-dialog right">
+                        <h4>Chair – Cloud & Digital Services Committee, P@SHA</h4>
+                        <p>Driving the growth of Pakistan’s cloud and digital services ecosystem by fostering innovation, enabling policy dialogue, and promoting adoption of secure, scalable, and globally competitive digital solutions across industries.</p>
+                    </div>
+                </div>
+
+                <div class="achievement-side right">
+                    <div class="achievement-card">
+                        <div class="achievement-image-container">
+                            <img src="https://images.unsplash.com/photo-1552581234-26160f608093?w=600" class="achievement-image" alt="Community Impact">
+                            <h3 class="achievement-title"> Co-Chair – Industry Engagement Committee, P@SHA</h3>
+                        </div>
+                    </div>
+                    <div class="achievement-dialog left">
+                        <h4>Co-Chair – Industry Engagement Committee, P@SHA</h4>
+                        <p>Collaborating with industry leaders to strengthen partnerships, enhance member engagement, and promote initiatives that bridge the gap between technology providers, enterprises, and the broader innovation ecosystem in Pakistan.  .</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hidden Achievement Cards -->
+            <div class="achievement-hidden">
+                <!-- Third Row -->
+                <div class="achievement-pair">
+                    <div class="achievement-side left">
+                        <div class="achievement-card">
+                            <div class="achievement-image-container">
+                                <img src="https://images.unsplash.com/photo-1523287562758-66c7fc58967f?w=600" class="achievement-image" alt="Best Mentor">
+                                <h3 class="achievement-title">Best Mentor Award</h3>
+                            </div>
+                        </div>
+                        <div class="achievement-dialog right">
+                            <h4>Best Mentor Award</h4>
+                            <p>Recognized as an exceptional mentor who has guided countless professionals to achieve 
+                               their career goals. Dedicated to nurturing talent and fostering growth in the 
+                               technology sector through personalized guidance and industry insights.</p>
+                        </div>
+                    </div>
+
+                    <div class="achievement-side right">
+                        <div class="achievement-card">
+                            <div class="achievement-image-container">
+                                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600" class="achievement-image" alt="Industry Pioneer">
+                                <h3 class="achievement-title">Industry Pioneer</h3>
+                            </div>
+                        </div>
+                        <div class="achievement-dialog left">
+                            <h4>Industry Pioneer</h4>
+                            <p>Acknowledged as a pioneer in transforming traditional business practices through 
+                                modern methodologies. Leading the industry with innovative solutions and 
+                                forward-thinking strategies in cybersecurity and digital transformation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="see-more-btn" onclick="toggleAchievements()">See More</button>
+        </div>
+    </section>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-5 bg-light gallery-section">
+        <h2 class="section-title text-red text-center mb-5">Gallery</h2>
+        <div class="container">
+            <!-- Filter Buttons -->
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-10">
+                    <div class="btn-group-custom d-flex flex-wrap justify-content-center gap-3">
+                        <button class="filter-btn active" data-category="events">
+                            <span class="btn-content">
+                                <i class="fas fa-calendar-alt me-2"></i>
+                                <span class="btn-text">Events</span>
+                            </span>
+                            <span class="btn-ripple"></span>
+                        </button>
+                        <button class="filter-btn" data-category="conferences">
+                            <span class="btn-content">
+                                <i class="fas fa-users me-2"></i>
+                                <span class="btn-text">Conferences</span>
+                            </span>
+                            <span class="btn-ripple"></span>
+                        </button>
+                        <button class="filter-btn" data-category="news-channel">
+                            <span class="btn-content">
+                                <i class="fas fa-tv me-2"></i>
+                                <span class="btn-text">News Channel</span>
+                            </span>
+                            <span class="btn-ripple"></span>
+                        </button>
+                        <button class="filter-btn" data-category="speaker">
+                            <span class="btn-content">
+                                <i class="fas fa-microphone me-2"></i>
+                                <span class="btn-text">Speaker</span>
+                            </span>
+                            <span class="btn-ripple"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        <!-- Gallery Content Container -->  
+            <div class="gallery-content">
+                <div class="row g-4" id="galleryItems">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="unified-card">
+                            <img src="https://munaf.online/wp-content/uploads/2024/02/Manifesto-Point-01-Digital-Transformation.jpg" alt="Digital Transformation" class="card-image">
+                            <div class="card-content-wrapper">
+                                <h2 class="card-heading">Digital Transformation</h2>
+                                <p class="card-description">Driving innovation and efficiency across industries by integrating cutting-edge digital technologies.</p>
+                            </div>
+                            <div class="card-arrow"></div>
+                        </div>
+                    </div>
+                    <!-- Items will be dynamically loaded here -->
+                </div>
+            </div>
+     
+            <!-- See More Button -->
+            <div class="text-center mt-4">
+                <button id="seeMoreBtn" class="btn btn-primary btn-lg btn-custom d-none">See More</button>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div class="text-center d-none" id="loadingSpinner">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+                
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="footer-brand mb-3">Muhammad Munaf Majeed</h5>
+                    <p class="footer-text">Inspiring growth, fostering leadership, and creating vision for a better tomorrow.</p>
+                    <div class="social-icons mt-3">
+                        <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/mohammadmunaf" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@muziqpaki" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#pasha" class="footer-link">PASHA</a></li>
+                        <li><a href="#journey" class="footer-link">Journey</a></li>
+                        <li><a href="#about" class="footer-link">About</a></li>
+                        <li><a href="#gallery" class="footer-link">Gallery</a></li>
+                        <li><a href="#event" class="footer-link">Events</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="mb-3">Contact Info</h5>
+                    <ul class="list-unstyled contact-info">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Karachi, Pakistan</li>
+                        <li><i class="fas fa-envelope me-2"></i> munaf@s4scorp.com</li>
+                        <li><i class="fas fa-phone me-2"></i> +92 321 2002000</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="mb-3">Newsletter</h5>
+                    <p class="footer-text">Stay updated with my latest insights and events.</p>
+                    <form class="newsletter-form">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Your email" aria-label="Your email">
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </footer>
+
+    
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="../js/script.js"></script>
+    <script src="../js/gallery-new.js"></script>
+</body>
+</html>
