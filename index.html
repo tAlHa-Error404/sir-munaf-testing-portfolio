@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Muhammad Munaf Majeed — Portfolio</title>
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Inline CSS: consolidated from css/styles.css, gallery-animations.css, gallery-boxes.css, youtube-thumbnails.css -->
+  <style>
+/* ==== Consolidated styles (from styles.css) ==== */
+/* Variables and base */
+:root { --primary-color: #C21E25; --secondary-color: #1f2937; --accent-color: #0d6efd; }
+body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color: #222; background-color: #f8f9fa; }
+a { color: var(--accent-color); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container { max-width: 1200px; }
+
+/* Top banner */
+.top-banner { background: #111; color: #fff; padding: 6px 0; font-size: 0.9rem; }
+.top-banner p { margin: 0; }
+
+/* Header/Nav */
+.header-navbar { background-color: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.header-brand { font-weight: 700; letter-spacing: 0.3px; color: #222; }
+.navbar .nav-link { color: #444; font-weight: 500; }
+.navbar .nav-link.active, .navbar .nav-link:hover { color: var(--primary-color); }
+.navbar.scrolled { box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+
+/* Hero */
+.hero-section { position: relative; overflow: hidden; background: #fff; }
+.hero-image { width: 100%; height: 380px; object-fit: cover; border-bottom: 1px solid #eee; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.55)); }
+.hero-content { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: #fff; text-align: center; }
+.hero-title { font-size: 2.4rem; font-weight: 800; letter-spacing: 0.2px; }
+.hero-subtitle { font-size: 1.05rem; opacity: 0.9; }
+
+/* Sections */
+.section { padding: 60px 0; }
+.section-title { font-size: 2.2rem; font-weight: 800; color: #111; margin-bottom: 24px; text-align: center; }
+.section-subtitle { color: #555; font-size: 1rem; text-align: center; margin-bottom: 24px; }
+
+/* Stat boxes */
+.stat-box { background: #fff; border-radius: 14px; padding: 22px; box-shadow: 0 6px 24px rgba(0,0,0,0.06); text-align: center; }
+.stat-box h3 { font-size: 1.8rem; color: var(--primary-color); margin: 8px 0 4px; }
+.stat-box p { margin: 0; color: #666; }
+
+/* Achievement cards */
+.achievement-card { background: #fff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden; height: 100%; display: flex; flex-direction: column; }
+.achievement-image { width: 100%; height: 220px; object-fit: cover; }
+.achievement-content { padding: 18px; }
+.achievement-title { font-weight: 700; font-size: 1.1rem; color: #222; }
+.achievement-desc { color: #666; font-size: 0.95rem; }
+.achievement-hidden { display: none; }
+.see-more-btn { margin-top: 12px; }
+
+/* Gallery */
+.gallery-image { width: 100%; height: 220px; object-fit: cover; border-radius: 12px; }
+.gallery-card { background: #fff; border: 1px solid #e9ecef; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 12px; }
+.gallery-thumb { width: 180px; height: 120px; object-fit: cover; border-radius: 8px; }
+
+/* Footer */
+.site-footer { background: #0f172a; color: #cbd5e1; padding: 36px 0; }
+.site-footer a { color: #93c5fd; }
+.footer-title { color: #fff; font-weight: 700; font-size: 1.1rem; margin-bottom: 12px; }
+.footer-link { display: inline-block; margin: 6px 0; }
+
+/* Gallery Animations (from gallery-animations.css) */
+.gallery-section .section-title { font-size: 3.5rem; font-weight: 700; margin-bottom: 2rem; position: relative; display: inline-block; }
+.gallery-section .section-title:after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: var(--primary-color, #007bff); border-radius: 2px; }
+.btn-group-custom { margin-bottom: 2rem; }
+.filter-btn { position: relative; padding: 12px 30px; border: none; background: linear-gradient(145deg, var(--primary-color, #007bff), var(--secondary-color, #0056b3)); border-radius: 8px; color: #fff; font-weight: 600; overflow: hidden; transition: all 0.4s ease; box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3); text-transform: uppercase; letter-spacing: 1px; margin: 0 8px; }
+.filter-btn .btn-content { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
+.filter-btn .btn-ripple { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); opacity: 0; transition: opacity 0.3s ease; }
+.filter-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4); background: linear-gradient(145deg, var(--secondary-color, #0056b3), var(--primary-color, #007bff)); animation: buttonPulse 1s ease-in-out infinite; }
+@keyframes buttonPulse { 0% { transform: scale(1) translateY(-2px); } 50% { transform: scale(1.02) translateY(-2px); } 100% { transform: scale(1) translateY(-2px); } }
+.filter-btn:hover .btn-ripple { opacity: 0.2; }
+.filter-btn.active { background: #fff; color: var(--primary-color, #007bff); font-weight: 700; box-shadow: 0 4px 20px rgba(0, 123, 255, 0.25); }
+.filter-btn.active::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--primary-color, #007bff); border-radius: 3px; }
+.gallery-item { position: relative; border-radius: 12px; overflow: hidden; margin-bottom: 30px; transform: translateY(20px); opacity: 0; transition: all 0.5s ease; animation: fadeInUp 0.6s ease-out backwards; }
+.gallery-item:nth-child(1) { animation-delay: 0.1s; } .gallery-item:nth-child(2) { animation-delay: 0.2s; } .gallery-item:nth-child(3) { animation-delay: 0.3s; } .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.gallery-item .event-label { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; padding: 4px 12px; border-radius: 4px; font-size: 0.8rem; }
+.news-bar { background: linear-gradient(90deg, #1a1a1a, #333); padding: 15px; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; color: white; }
+.news-bar .news-date { font-size: 0.8rem; opacity: 0.7; margin-left: auto; }
+.conference-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+.conference-card .conference-details { padding: 20px; }
+.conference-card .conference-date, .conference-card .conference-venue { font-size: 0.9rem; color: #666; margin-top: 8px; }
+.gallery-item.show { transform: translateY(0); opacity: 1; }
+.gallery-item img { width: 100%; height: 250px; object-fit: cover; transition: transform 0.5s ease; }
+.gallery-item:hover img { transform: scale(1.05); }
+.gallery-item-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5)); color: white; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); backdrop-filter: blur(5px); opacity: 0; }
+.gallery-item:hover .gallery-item-content { transform: translateY(0); opacity: 1; }
+.gallery-item-title { font-size: 1.2rem; margin-bottom: 8px; }
+.gallery-item-desc { font-size: 0.9rem; opacity: 0.9; }
+
+/* Gallery Boxes (from gallery-boxes.css) */
+.unified-card { background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); overflow: hidden; display: flex; flex-direction: row; align-items: center; padding: 1.5rem; transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%; position: relative; }
+.unified-card:hover { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); }
+.card-arrow { flex-shrink: 10; width: 30%; height: 100px; background-color: red; clip-path: polygon(0% 50%, 100% 0%, 100% 100%); margin-right: 1.5rem; opacity: 0; transition: opacity 0.3s ease; }
+.unified-card:hover .card-arrow { opacity: 1; }
+.card-image { flex-grow: 1; max-width: 40%; height: 200px; object-fit: cover; border-radius: 0.25rem; transition: filter 0.3s ease; }
+.unified-card:hover .card-image { filter: brightness(0.7); }
+.card-content-wrapper { flex-shrink: 0; margin-left: 1.5rem; text-align: right; }
+.card-heading { font-size: 2.5rem; color: #333; margin-bottom: 0; line-height: 1.2; }
+@media (max-width: 992px) { .unified-card { flex-direction: column; text-align: center; } .unified-card .card-arrow { margin: 0 auto 1rem auto; width: 15%; height: 70px; } .unified-card .card-image { max-width: 80%; margin-bottom: 1rem; } .unified-card .card-content-wrapper { margin-left: 0; margin-top: 1rem; text-align: center; } .unified-card .card-heading { font-size: 2rem; } }
+@media (max-width: 768px) { .unified-card { padding: 1rem; } .unified-card .card-arrow { width: 15%; height: 50px; } .unified-card .card-heading { font-size: 1.8rem; } }
+@media (max-width: 576px) { .unified-card .card-arrow { width: 15%; height: 40px; } .unified-card .card-heading { font-size: 1.5rem; } }
+
+/* YouTube thumbnail styles (from youtube-thumbnails.css) */
+.yt-thumb { display: block; width: 180px; max-width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; border-radius: 6px; background-color: #e9ecef; }
+.yt-thumb-loaded { background-color: transparent; }
+.yt-thumb-fallback { background-color: #e9ecef; }
+  </style>
+</head>
+<body>
+  <!-- Top Banner -->
+  <div class="top-banner">
+    <div class="container-fluid">
+      <p class="mb-0 text-center">For training sessions, engagement & business related query - Email at munaf@s4scorp.com</p>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light header-navbar sticky-top">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto header-left">
+          <li class="nav-item"><a class="nav-link" href="#pasha">P@SHA</a></li>
+          <li class="nav-item"><a class="nav-link" href="#journey">Journey</a></li>
+        </ul>
+        <a class="navbar-brand mx-auto text-center header-brand" href="#home">Muhammad Munaf Majeed</a>
+        <ul class="navbar-nav ms-auto header-right">
+          <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="#event">Event</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="home" class="hero-section">
+    <img src="images/hero section.jpg" alt="Hero Background" class="hero-image" loading="eager" decoding="async">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Driving Pakistan’s Digital Future</h1>
+      <p class="hero-subtitle">Cybersecurity leader • Educator • Industry collaborator</p>
+    </div>
+  </section>
+
+  <!-- Journey (excerpt from existing index) -->
+  <section id="journey" class="section">
+    <div class="container">
+      <h2 class="section-title">Journey</h2>
+      <p class="section-subtitle">Exploring leadership, community impact, and technology advancement</p>
+      <div class="row gy-4">
+        <div class="col-md-6">
+          <img src="images/IMG-20250326-WA0036 (1).jpg" alt="Muhammad Munaf Majeed" class="journey-image d-block mx-auto" loading="lazy" decoding="async">
+        </div>
+        <div class="col-md-6">
+          <img src="images/CXO Meetup 2.jpg" alt="CXO Meetup 2" class="journey-image d-block mx-auto" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery (excerpt from existing index) -->
+  <section id="gallery" class="section gallery-section">
+    <div class="container">
+      <h2 class="section-title">Gallery</h2>
+      <div class="row gy-4">
+        <div class="col-sm-6 col-lg-3">
+          <img src="images/Infosec_9.jpeg" alt="Cybersecurity" class="gallery-image" loading="lazy" decoding="async">
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <img src="images/SMIT 1 .png" alt="Policy Making" class="gallery-image" loading="lazy" decoding="async">
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <img src="images/Infosec_4.jpeg" alt="Mentorship" class="gallery-image" loading="lazy" decoding="async">
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <img src="images/SMEC 3.png" alt="Industry Engagement" class="gallery-image" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements (excerpt, keeping behavior) -->
+  <section id="achievements" class="section">
+    <div class="container">
+      <h2 class="section-title">Key Achievements</h2>
+      <div class="row gy-4">
+        <div class="col-sm-6 col-lg-4">
+          <div class="achievement-card">
+            <img src="images/NCERT_2.png" class="achievement-image" alt="Chair - Cybersecurity Committee, P@SHA" loading="lazy" decoding="async">
+            <div class="achievement-content">
+              <div class="achievement-title">Chair - Cybersecurity Committee, P@SHA</div>
+              <div class="achievement-desc">Leading national cybersecurity initiatives and policy frameworks.</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+          <div class="achievement-card">
+            <img src="images/SMEC 3.png" class="achievement-image" alt="Chairperson – Cybersecurity Committee, FPCCI" loading="lazy" decoding="async">
+            <div class="achievement-content">
+              <div class="achievement-title">Chairperson – Cybersecurity Committee, FPCCI</div>
+              <div class="achievement-desc">Strengthening industry collaboration and security standards.</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-4">
+          <div class="achievement-card">
+            <img src="images/CXO Meetup 2.jpg" class="achievement-image top-crop" alt="Chair – Cloud & Digital Services Committee, P@SHA" loading="lazy" decoding="async">
+            <div class="achievement-content">
+              <div class="achievement-title">Chair – Cloud & Digital Services Committee, P@SHA</div>
+              <div class="achievement-desc">Driving cloud adoption and digital transformation.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="achievement-hidden mt-3">
+        <div class="row gy-4">
+          <div class="col-sm-6 col-lg-4">
+            <div class="achievement-card">
+              <img src="images/Coffee With HBL .png" class="achievement-image headshot" alt="Co-Chair – Industry Engagement Committee, P@SHA — Professional headshot" loading="lazy" decoding="async">
+              <div class="achievement-content">
+                <div class="achievement-title">Co-Chair – Industry Engagement Committee, P@SHA</div>
+                <div class="achievement-desc">Enabling deeper public-private collaboration.</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="achievement-card">
+              <img src="images/SMIT 2 .png" class="achievement-image" alt="Best Mentor Award" loading="lazy" decoding="async">
+              <div class="achievement-content">
+                <div class="achievement-title">Best Mentor Award</div>
+                <div class="achievement-desc">Recognized for contributions to youth and talent development.</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="achievement-card">
+              <img src="images/SMEC 1.png" class="achievement-image top-crop" alt="Industry Pioneer" loading="lazy" decoding="async">
+              <div class="achievement-content">
+                <div class="achievement-title">Industry Pioneer</div>
+                <div class="achievement-desc">Leadership in national-scale initiatives and forums.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center"><button class="btn btn-outline-primary see-more-btn" onclick="toggleAchievements()">See More</button></div>
+    </div>
+  </section>
+
+  <!-- PASHA Section: merged content -->
+  <section id="pasha" class="section">
+    <div class="container">
+      <h2 class="section-title">P@SHA</h2>
+      <p class="section-subtitle">Manifesto and Industry Representation</p>
+
+      <div class="row gy-4">
+        <!-- Manifesto (YouTube items) -->
+        <div class="col-lg-6">
+          <h3 class="mb-3">Manifesto</h3>
+          <div class="row gy-3">
+            <div class="col-12">
+              <a href="https://www.youtube.com/watch?v=_xe7In2Noj0" target="_blank" class="d-flex align-items-center gallery-card p-2 text-decoration-none border bg-white rounded shadow-sm h-100">
+                <img data-video-id="_xe7In2Noj0" class="yt-thumb me-3" alt="Digital Transformation">
+                <div class="flex-fill">
+                  <h5 class="mb-1 fw-semibold" style="color:#222;">Digital Transformation</h5>
+                  <div class="text-muted small">Enabling growth through digitalization and automation for every business size.</div>
+                </div>
+              </a>
+            </div>
+            <div class="col-12">
+              <a href="https://www.youtube.com/watch?v=dCkHhr4hS-E" target="_blank" class="d-flex align-items-center gallery-card p-2 text-decoration-none border bg-white rounded shadow-sm h-100">
+                <img data-video-id="dCkHhr4hS-E" class="yt-thumb me-3" alt="Cybersecurity for All">
+                <div class="flex-fill">
+                  <h5 class="mb-1 fw-semibold" style="color:#222;">Cybersecurity for All</h5>
+                  <div class="text-muted small">Protecting Pakistan's businesses with robust security policies and education.</div>
+                </div>
+              </a>
+            </div>
+            <div class="col-12">
+              <a href="https://www.youtube.com/watch?v=mwyotbr5WmM" target="_blank" class="d-flex align-items-center gallery-card p-2 text-decoration-none border bg-white rounded shadow-sm h-100">
+                <img data-video-id="mwyotbr5WmM" class="yt-thumb me-3" alt="Talent Development">
+                <div class="flex-fill">
+                  <h5 class="mb-1 fw-semibold" style="color:#222;">Talent Development</h5>
+                  <div class="text-muted small">Advancing skills and career prospects for Pakistan's IT youth through mentorship.</div>
+                </div>
+              </a>
+            </div>
+            <div class="col-12">
+              <a href="https://www.youtube.com/watch?v=C7K70m-IOX8" target="_blank" class="d-flex align-items-center gallery-card p-2 text-decoration-none border bg-white rounded shadow-sm h-100">
+                <img data-video-id="C7K70m-IOX8" class="yt-thumb me-3" alt="Women in Tech">
+                <div class="flex-fill">
+                  <h5 class="mb-1 fw-semibold" style="color:#222;">Women in Tech</h5>
+                  <div class="text-muted small">Empowering women in Pakistan's technology sector for an inclusive future.</div>
+                </div>
+              </a>
+            </div>
+            <div class="col-12">
+              <a href="https://www.youtube.com/watch?v=1WxNdpz-Qps" target="_blank" class="d-flex align-items-center gallery-card p-2 text-decoration-none border bg-white rounded shadow-sm h-100">
+                <img data-video-id="1WxNdpz-Qps" class="yt-thumb me-3" alt="Open Innovation">
+                <div class="flex-fill">
+                  <h5 class="mb-1 fw-semibold" style="color:#222;">Open Innovation</h5>
+                  <div class="text-muted small">Promoting open-source and community-driven tech progress for public benefit.</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Industry Representation -->
+        <div class="col-lg-6">
+          <h3 class="mb-3">Industry Representation</h3>
+          <div class="row gy-3">
+            <div class="col-md-6">
+              <div class="industry-card">
+                <div class="industry-card-media"><img src="images/Coffee With HBL .png" alt="Coffee with HBL"></div>
+                <div class="industry-card-content">
+                  <h6 class="industry-card-title">Coffee with HBL</h6>
+                  <p class="industry-card-desc">Networking fostering collaboration, innovation, and discussions among leaders.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="industry-card">
+                <div class="industry-card-media"><img src="images/SMEC 3.png" alt="SMEC"></div>
+                <div class="industry-card-content">
+                  <h6 class="industry-card-title">SMEC</h6>
+                  <p class="industry-card-desc">Annual SSUET event showcasing creativity and engineering problem-solving.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="industry-card">
+                <div class="industry-card-media"><img src="images/Hydra Tech 1.jpeg" alt="Hydra Tech"></div>
+                <div class="industry-card-content">
+                  <h6 class="industry-card-title">Hydra Tech</h6>
+                  <p class="industry-card-desc">Interactive tech talk bringing experts and students together.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="industry-card">
+                <div class="industry-card-media"><img src="images/InfoSec 1.jpeg" alt="InfoSec"></div>
+                <div class="industry-card-content">
+                  <h6 class="industry-card-title">InfoSec</h6>
+                  <p class="industry-card-desc">Event dedicated to digital security, data protection and cyber threats.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="industry-card">
+                <div class="industry-card-media"><img src="images/ISTD .jfif" alt="ISTD"></div>
+                <div class="industry-card-content">
+                  <h6 class="industry-card-title">ISTD Meeting</h6>
+                  <p class="industry-card-desc">Advancing IT education standards and future trends in technology.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="industry-card">
+                <div class="industry-card-media"><img src="images/NCERT_2.png" alt="NCERT"></div>
+                <div class="industry-card-content">
+                  <h6 class="industry-card-title">PASHA & NCERT Meeting</h6>
+                  <p class="industry-card-desc">Collaborating to integrate industry needs into education frameworks.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="industry-card">
+                <div class="industry-card-media"><img src="images/SMIT 1 .png" alt="SMIT 1"></div>
+                <div class="industry-card-content">
+                  <h6 class="industry-card-title">PASHA IT MEGA Exam</h6>
+                  <p class="industry-card-desc">Comprehensive assessment setting benchmarks for IT professionals.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-md-4">
+          <div class="footer-title">Quick Links</div>
+          <ul class="list-unstyled">
+            <li><a href="#journey" class="footer-link">Journey</a></li>
+            <li><a href="#gallery" class="footer-link">Gallery</a></li>
+            <li><a href="#event" class="footer-link">Event</a></li>
+            <li><a href="#pasha" class="footer-link">PASHA</a></li>
+            <li><a href="https://tech-hub-lab.github.io/Claude-profile/" target="_blank" rel="noopener noreferrer" class="footer-link">Live Site</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <div class="footer-title">Contact</div>
+          <p class="mb-1"><i class="bi bi-envelope"></i> munaf@s4scorp.com</p>
+        </div>
+        <div class="col-md-4">
+          <div class="footer-title">Follow</div>
+          <a class="me-2" href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a class="me-2" href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a class="me-2" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Inline helper: path-resolver.js -->
+  <script>
+/**
+ * Path Resolver - Robust URL normalization for hosted and local environments
+ */
+(function(){const isFileProtocol=window.location.protocol==='file:';const baseDir=new URL('.',document.baseURI).href;window.siteConfig={basePath:baseDir,isFileProtocol:isFileProtocol,resolvePath:function(relativePath){if(!relativePath)return relativePath;const lower=relativePath.toLowerCase();if(lower.startsWith('http://')||lower.startsWith('https://')||lower.startsWith('file://')||lower.startsWith('//')||lower.startsWith('data:')||lower.startsWith('mailto:')||lower.startsWith('tel:')||lower.startsWith('#')){return relativePath;}try{return new URL(relativePath,this.basePath).href;}catch(e){console.warn('Path resolver: failed to resolve',relativePath,e);return relativePath;}}};document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('img[src]').forEach(img=>{const originalSrc=img.getAttribute('src');const resolved=window.siteConfig.resolvePath(originalSrc);if(resolved&&resolved!==originalSrc){img.setAttribute('src',resolved);}});document.querySelectorAll('[style*="background-image"]').forEach(el=>{const style=el.getAttribute('style');if(!style)return;const match=style.match(/url\(['"]?(.*?)['"]?\)/);if(match&&match[1]){const resolved=window.siteConfig.resolvePath(match[1]);if(resolved&&resolved!==match[1]){const newStyle=style.replace(/url\(['"]?(.*?)['"]?\)/,`url("${resolved}")`);el.setAttribute('style',newStyle);}}});document.querySelectorAll('video > source[src]').forEach(source=>{const originalSrc=source.getAttribute('src');const resolved=window.siteConfig.resolvePath(originalSrc);if(resolved&&resolved!==originalSrc){source.setAttribute('src',resolved);}});document.querySelectorAll('a[href]').forEach(a=>{const href=a.getAttribute('href');if(!href)return;const lower=href.toLowerCase();if(lower.startsWith('file:///')){const idx=lower.indexOf('/claude-profile/');if(idx!==-1){const subPath=href.substring(idx+'/claude-profile/'.length);try{const resolved=new URL(subPath,window.siteConfig.basePath).href;a.setAttribute('href',resolved);}catch(e){console.warn('Path resolver: failed to rewrite file href',href,e);}}else{console.warn('Path resolver: leaving file href unchanged (no project match):',href);}}});console.log('Path resolver applied using baseDir:',baseDir);});})();
+  </script>
+
+  <!-- Inline main interactions: script.js -->
+  <script>
+/** Custom JavaScript for Portfolio **/
+window.addEventListener('scroll',function(){const navbar=document.querySelector('.navbar');if(window.scrollY>50){navbar.classList.add('scrolled');}else{navbar.classList.remove('scrolled');}});
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){const href=this.getAttribute('href');if(href&&href.startsWith('#')){e.preventDefault();const target=document.querySelector(href);if(target){const navbarHeight=document.querySelector('.navbar').offsetHeight;const topBannerHeight=document.querySelector('.top-banner').offsetHeight;const targetPosition=target.offsetTop-navbarHeight-topBannerHeight;window.scrollTo({top:targetPosition,behavior:'smooth'});const navbarCollapse=document.querySelector('.navbar-collapse');if(navbarCollapse&&navbarCollapse.classList.contains('show')){navbarCollapse.classList.remove('show');}}}});});
+window.addEventListener('scroll',function(){const sections=document.querySelectorAll('section[id]');const navLinks=document.querySelectorAll('.navbar-nav .nav-link');let current='';const navbarHeight=document.querySelector('.navbar').offsetHeight+100;sections.forEach(section=>{const sectionTop=section.offsetTop; if(window.pageYOffset>=(sectionTop-navbarHeight)){current=section.getAttribute('id');}});navLinks.forEach(link=>{link.classList.remove('active');if(link.getAttribute('href')===`#${current}`){link.classList.add('active');}});});
+function showGalleryCategory(categoryId){const allContents=document.querySelectorAll('.gallery-content');allContents.forEach(content=>{content.classList.remove('active');});const allButtons=document.querySelectorAll('.gallery-category-btn');allButtons.forEach(button=>{button.classList.remove('active');});const selectedContent=document.getElementById(categoryId);if(selectedContent){selectedContent.classList.add('active');}const selectedButton=document.querySelector(`[onclick="showGalleryCategory('${categoryId}')"]`);if(selectedButton){selectedButton.classList.add('active');}}
+const galleryItems=document.querySelectorAll('.gallery-item');const modalEl=document.getElementById('galleryModal');const modal=modalEl?new bootstrap.Modal(modalEl):null;const modalImage=document.getElementById('modalImage');galleryItems.forEach(item=>{item.addEventListener('click',function(){const img=this.querySelector('img');if(!img||!modal){return;}const imgSrc=img.getAttribute('src');const imgAlt=img.getAttribute('alt');modalImage.setAttribute('src',imgSrc);modalImage.setAttribute('alt',imgAlt);modal.show();});});
+function toggleAchievements(){const hiddenSection=document.querySelector('.achievement-hidden');const seeMoreBtn=document.querySelector('.see-more-btn');if(!hiddenSection||!seeMoreBtn)return;if(hiddenSection.style.display==='block'){hiddenSection.style.display='none';seeMoreBtn.textContent='See More';}else{hiddenSection.style.display='block';seeMoreBtn.textContent='See Less';}}
+const fadeElements=document.querySelectorAll('.achievement-card, .event-card, .gallery-item');const fadeInObserver=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.style.opacity='0';entry.target.style.transform='translateY(20px)';setTimeout(()=>{entry.target.style.transition='opacity 0.6s ease, transform 0.6s ease';entry.target.style.opacity='1';entry.target.style.transform='translateY(0)';},100);fadeInObserver.unobserve(entry.target);}});},{threshold:0.1});fadeElements.forEach(element=>{fadeInObserver.observe(element);});
+document.addEventListener('DOMContentLoaded',function(){const video=document.querySelector('.video-background video');if(video){video.play().catch(error=>{console.log('Video autoplay failed:',error);});const videoObserver=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){video.play();}else{video.pause();}});});videoObserver.observe(video);}});
+const statNumbers=document.querySelectorAll('.stat-box h3');const countUp=(element)=>{const target=parseInt(element.textContent);const duration=2000;const increment=target/(duration/16);let current=0;const timer=setInterval(()=>{current+=increment;if(current>=target){element.textContent=target+'+';clearInterval(timer);}else{element.textContent=Math.floor(current)+'+';}},16);};const statsObserver=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){countUp(entry.target);statsObserver.unobserve(entry.target);}});},{threshold:0.5});statNumbers.forEach(stat=>{statsObserver.observe(stat);});
+const forms=document.querySelectorAll('.needs-validation');forms.forEach(form=>{form.addEventListener('submit',event=>{if(!form.checkValidity()){event.preventDefault();event.stopPropagation();}form.classList.add('was-validated');},false);});
+const createBackToTopButton=()=>{const button=document.createElement('button');button.innerHTML='<i class="bi bi-arrow-up"></i>';button.className='btn btn-primary back-to-top';button.style.cssText='position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;';document.body.appendChild(button);button.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'});});};
+  </script>
+
+  <!-- Inline gallery logic: gallery-new.js -->
+  <script>
+// Minimal bootstrap to show items (full data file previously)
+// If there were dynamic category switching, keep functions here.
+// The current consolidated page uses static sections above.
+  </script>
+
+  <!-- Inline YouTube thumbnails loader -->
+  <script>
+(function(){const LS_PREFIX='ytThumb:';const placeholderSvg='data:image/svg+xml;charset=UTF-8,'+encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9' width='160' height='90'><rect fill='#e9ecef' width='16' height='9'/><path fill='#c4c9ce' d='M6.4 2.8l4 2.2-4 2.2z'/></svg>");const candidatesFor=id=>[`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,`https://i.ytimg.com/vi/${id}/hqdefault.jpg`,`https://i.ytimg.com/vi/${id}/mqdefault.jpg`,`https://i.ytimg.com/vi/${id}/default.jpg`];const parseVideoId=el=>{const dataId=el.getAttribute('data-video-id');if(dataId)return dataId.trim();const link=el.closest('a');const href=link?link.getAttribute('href')||'':'';const patterns=[/[?&]v=([\w-]{11})/,/youtu\.be\/([\w-]{11})/,\/\/embed\/([\w-]{11})/];for(const re of patterns){const m=href.match(re);if(m&&m[1])return m[1];}return null;};const loadFirstAvailable=id=>new Promise(resolve=>{const cached=safeGetLS(LS_PREFIX+id);const list=cached?[cached,...candidatesFor(id)]:candidatesFor(id);let idx=0;const tryNext=()=>{if(idx>=list.length)return resolve(null);const url=list[idx++];const img=new Image();let settled=false;const cleanup=()=>{img.onload=null;img.onerror=null;};img.onload=()=>{if(settled)return;settled=true;cleanup();safeSetLS(LS_PREFIX+id,url);resolve(url);};img.onerror=()=>{if(settled)return;cleanup();tryNext();};img.src=url;setTimeout(()=>{if(!settled){cleanup();tryNext();}},4000);};tryNext();});function safeGetLS(key){try{return localStorage.getItem(key);}catch(_){return null;}}function safeSetLS(key,value){try{localStorage.setItem(key,value);}catch(_){}}const applyThumb=async(img)=>{const id=parseVideoId(img);if(!id)return;if(!img.getAttribute('src'))img.setAttribute('src',placeholderSvg);const best=await loadFirstAvailable(id);if(best){img.src=best;img.classList.add('yt-thumb-loaded');img.setAttribute('srcset',[`https://i.ytimg.com/vi/${id}/default.jpg 120w`,`https://i.ytimg.com/vi/${id}/mqdefault.jpg 320w`,`https://i.ytimg.com/vi/${id}/hqdefault.jpg 480w`,`https://i.ytimg.com/vi/${id}/maxresdefault.jpg 1280w`].join(', '));img.setAttribute('sizes','(max-width: 480px) 100vw, 180px');}else{img.src=placeholderSvg;img.classList.add('yt-thumb-fallback');img.alt=img.alt||'Thumbnail unavailable';}};const init=()=>{const els=document.querySelectorAll('img.yt-thumb, img[data-video-id]');if(!els.length)return;const io='IntersectionObserver'in window?new IntersectionObserver((entries,obs)=>{entries.forEach((e)=>{if(e.isIntersecting){const img=e.target;obs.unobserve(img);applyThumb(img);}});},{rootMargin:'200px 0px'}):null;els.forEach((img)=>{img.loading=img.loading||'lazy';img.decoding=img.decoding||'async';img.fetchPriority=img.fetchPriority||'low';img.classList.add('yt-thumb');if(!img.getAttribute('src'))img.setAttribute('src',placeholderSvg);if(io)io.observe(img);else applyThumb(img);});};if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}})();
+  </script>
+</body>
+</html>
