@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="../css/styles.css?v=1708692695509650000">
     <link rel="stylesheet" href="../css/gallery-animations.css">
     <link rel="stylesheet" href="../css/gallery-boxes.css">
+    
+    <!-- Path Resolver - Ensures consistent resource loading -->
+    <script src="../js/path-resolver.js"></script>
  
     <style>
         /* Manifesto-style Gallery Item (replicated from PASHA design) */
@@ -146,7 +149,8 @@
 
         .unified-card .card-image {
             width: 100%;
-            height: 100%; /* fill left half vertically */
+            height: auto; /* use natural height to match aspect ratio */
+            aspect-ratio: 16 / 9; /* consistent media sizing */
             object-fit: cover;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -356,14 +360,11 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Video Background -->
+    <!-- Hero Section with Image Background -->
     <section id="home" class="hero-section">
-        <div class="video-background">
-            <video autoplay muted loop playsinline>
-                <source src="https://cdn.coverr.co/videos/coverr-business-meeting-in-modern-office-4614/1080p.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="video-overlay"></div>
+        <div class="image-background">
+            <img src="../images/hero section.jpg" alt="Hero Background" class="hero-image" loading="eager" decoding="async">
+            <div class="image-overlay"></div>
         </div>
         <div class="hero-content">
             <div class="container text-center">
@@ -451,7 +452,7 @@ Driven by a passion for technological advancement and knowledge sharing, Mohamma
                 <div class="col-lg-6 col-md-6">
                     <div class="gallery-item">
                         <span class="arrow">&#8594;</span>
-                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800" alt="Cybersecurity" class="gallery-image">
+                        <img src="../images/Infosec_9.jpeg" alt="Cybersecurity" class="gallery-image">
                         <div class="gallery-text">
                             <div class="gallery-title">Cybersecurity Leadership</div>
                             <div class="gallery-description">I build smart systems and fast response plans so organizations can bounce back from threats—without breaking a sweat.</div>
@@ -461,9 +462,9 @@ Driven by a passion for technological advancement and knowledge sharing, Mohamma
 
                 <!-- Policy & Digital Rules -->
                 <div class="col-lg-6 col-md-6">
-                    <div class="gallery-item">
+                    <div class="gallery-item">  
                         <span class="arrow">&#8594;</span>
-                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800" alt="Policy Making" class="gallery-image">
+                        <img src="../images/SMIT 1 .png" alt="Policy Making" class="gallery-image">
                         <div class="gallery-text">
                             <div class="gallery-title">Advocacy & Policy Engagement</div>
                             <div class="gallery-description">I help write the cybersecurity playbook for Pakistan. VPNs, frameworks, internet safety. I'm in those rooms, asking the big questions.</div>
@@ -475,7 +476,7 @@ Driven by a passion for technological advancement and knowledge sharing, Mohamma
                 <div class="col-lg-6 col-md-6">
                     <div class="gallery-item">
                         <span class="arrow">&#8594;</span>
-                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800" alt="Mentorship" class="gallery-image">
+                        <img src="../images/Infosec_4.jpeg" alt="Mentorship" class="gallery-image" loading="lazy" decoding="async">
                         <div class="gallery-text">
                             <div class="gallery-title">Mentorship</div>
                             <div class="gallery-description">I guide the next generation—students, startups, pros—so they don't fall into the same traps we did back in the day.</div>
@@ -487,7 +488,7 @@ Driven by a passion for technological advancement and knowledge sharing, Mohamma
                 <div class="col-lg-6 col-md-6">
                     <div class="gallery-item">
                         <span class="arrow">&#8594;</span>
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800" alt="Industry Engagement" class="gallery-image">
+                        <img src="../images/SMEC 3.png" alt="Industry Engagement" class="gallery-image" loading="lazy" decoding="async">
                         <div class="gallery-text">
                             <div class="gallery-title">Media & Public Engagement</div>
                             <div class="gallery-description">Leading initiatives to foster collaboration between industry stakeholders and drive innovation in the IT sector.</div>
@@ -499,7 +500,7 @@ Driven by a passion for technological advancement and knowledge sharing, Mohamma
                 <div class="col-lg-6 col-md-6">
                     <div class="gallery-item">
                         <span class="arrow">&#8594;</span>
-                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800" alt="Digital Transformation" class="gallery-image">
+                        <img src="../images/CXO Meetup 2.jpg" alt="Technology Innovation" class="gallery-image" loading="lazy" decoding="async">
                         <div class="gallery-text">
                             <div class="gallery-title">Digital Transformation</div>
                             <div class="gallery-description">Driving innovation and efficiency across industries by integrating cutting-edge digital technologies.</div>
@@ -511,7 +512,7 @@ Driven by a passion for technological advancement and knowledge sharing, Mohamma
                 <div class="col-lg-6 col-md-6">
                     <div class="gallery-item">
                         <span class="arrow">&#8594;</span>
-                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800" alt="Local Solutions" class="gallery-image">
+                        <img src="../images/SMIT 3 .png" alt="Local Solutions" class="gallery-image" loading="lazy" decoding="async">
                         <div class="gallery-text">
                             <div class="gallery-title">Local Solutions, Global Quality</div>
                             <div class="gallery-description">Through Server4Sale, we deliver top-notch cybersecurity with local insight. It's fast, it's effective, and it just works.</div>
@@ -523,7 +524,7 @@ Driven by a passion for technological advancement and knowledge sharing, Mohamma
     </section>
 
 
-    <!-- Achievements Section -->
+    <!-- Achievements: Cloud & Digital Services Committee -->
     <section id="achievements" class="py-5">
         <h2 class="section-title text-red text-center mb-5">Achievements</h2>
         <div class="container">
@@ -532,7 +533,7 @@ Driven by a passion for technological advancement and knowledge sharing, Mohamma
                 <div class="achievement-side left">
                     <div class="achievement-card">
                         <div class="achievement-image-container">
-                            <img src="https://images.unsplash.com/photo-1569705460033-cfaa4bf9f822?w=600" class="achievement-image" alt="Award of Excellence">
+                            <img src="../images/NCERT_2.png" class="achievement-image" alt="Chair - Cybersecurity Committee, P@SHA" loading="lazy" decoding="async">
                             <h3 class="achievement-title">Chair - Cybersecurity Committee, P@SHA</h3>
                         </div>
                     </div>
@@ -545,7 +546,7 @@ Driven by a passion for technological advancement and knowledge sharing, Mohamma
                 <div class="achievement-side right">
                     <div class="achievement-card">
                         <div class="achievement-image-container">
-                            <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600" class="achievement-image" alt="Leadership Recognition">
+                            <img src="../images/SMEC 3.png" class="achievement-image" alt="Chairperson – Cybersecurity Committee, FPCCI" loading="lazy" decoding="async">
                             <h3 class="achievement-title">Chairperson – Cybersecurity Committee, FPCCI</h3>
                         </div>
                     </div>
@@ -561,7 +562,7 @@ Driven by a passion for technological advancement and knowledge sharing, Mohamma
                 <div class="achievement-side left">
                     <div class="achievement-card">
                         <div class="achievement-image-container">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600" class="achievement-image" alt="Innovation Award">
+                        <img src="../images/CXO Meetup 2.jpg" class="achievement-image top-crop" alt="Chair – Cloud & Digital Services Committee, P@SHA" loading="lazy" decoding="async">
                             <h3 class="achievement-title">Chair – Cloud & Digital Services Committee, P@SHA</h3>
                         </div>
                     </div>
@@ -574,7 +575,7 @@ Driven by a passion for technological advancement and knowledge sharing, Mohamma
                 <div class="achievement-side right">
                     <div class="achievement-card">
                         <div class="achievement-image-container">
-                            <img src="https://images.unsplash.com/photo-1552581234-26160f608093?w=600" class="achievement-image" alt="Community Impact">
+                        <img src="../images/Coffee With HBL .png" class="achievement-image headshot" alt="Co-Chair – Industry Engagement Committee, P@SHA — Professional headshot" loading="lazy" decoding="async">
                             <h3 class="achievement-title"> Co-Chair – Industry Engagement Committee, P@SHA</h3>
                         </div>
                     </div>
@@ -592,7 +593,7 @@ Driven by a passion for technological advancement and knowledge sharing, Mohamma
                     <div class="achievement-side left">
                         <div class="achievement-card">
                             <div class="achievement-image-container">
-                                <img src="https://images.unsplash.com/photo-1523287562758-66c7fc58967f?w=600" class="achievement-image" alt="Best Mentor">
+                        <img src="../images/SMIT 2 .png" class="achievement-image" alt="Best Mentor Award" loading="lazy" decoding="async">
                                 <h3 class="achievement-title">Best Mentor Award</h3>
                             </div>
                         </div>
@@ -607,7 +608,7 @@ Driven by a passion for technological advancement and knowledge sharing, Mohamma
                     <div class="achievement-side right">
                         <div class="achievement-card">
                             <div class="achievement-image-container">
-                                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600" class="achievement-image" alt="Industry Pioneer">
+                                <img src="../images/SMEC 1.png" class="achievement-image top-crop" alt="Industry Pioneer" loading="lazy" decoding="async">
                                 <h3 class="achievement-title">Industry Pioneer</h3>
                             </div>
                         </div>
@@ -709,20 +710,19 @@ Driven by a passion for technological advancement and knowledge sharing, Mohamma
                     <p class="footer-text">Inspiring growth, fostering leadership, and creating vision for a better tomorrow.</p>
                     <div class="social-icons mt-3">
                         <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                         <a href="https://www.linkedin.com/in/mohammadmunaf" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/s4s.pk/" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="https://www.youtube.com/@muziqpaki" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6">
                     <h5 class="mb-3">Quick Links</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#pasha" class="footer-link">PASHA</a></li>
+                        <li><a href="pasha.html" class="footer-link">PASHA</a></li>
                         <li><a href="#journey" class="footer-link">Journey</a></li>
-                        <li><a href="#about" class="footer-link">About</a></li>
+                        <li><a href="#about-me" class="footer-link">About</a></li>
                         <li><a href="#gallery" class="footer-link">Gallery</a></li>
-                        <li><a href="#event" class="footer-link">Events</a></li>
+                        <li><a href="#achievements" class="footer-link">Achievements</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -730,7 +730,6 @@ Driven by a passion for technological advancement and knowledge sharing, Mohamma
                     <ul class="list-unstyled contact-info">
                         <li><i class="fas fa-map-marker-alt me-2"></i> Karachi, Pakistan</li>
                         <li><i class="fas fa-envelope me-2"></i> munaf@s4scorp.com</li>
-                        <li><i class="fas fa-phone me-2"></i> +92 321 2002000</li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6">

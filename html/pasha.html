@@ -13,13 +13,12 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/youtube-thumbnails.css">
     <!-- Performance: Preconnect/DNS-Prefetch and Preload for YouTube thumbnails -->
     <link rel="preconnect" href="https://i.ytimg.com">
     <link rel="dns-prefetch" href="//i.ytimg.com">
     <link rel="preload" as="image" href="https://i.ytimg.com/vi/_xe7In2Noj0/hqdefault.jpg" />
     <!-- Additional preconnects for embedded videos -->
-    <link rel="preconnect" href="https://www.youtube-nocookie.com">
-    <link rel="dns-prefetch" href="//www.youtube-nocookie.com">
     <link rel="preconnect" href="https://www.youtube.com">
     <link rel="dns-prefetch" href="//www.youtube.com">
 </head>
@@ -293,6 +292,88 @@
                 padding-bottom: 2rem !important;
             }
         }
+        /* Responsive, elegant footer styling */
+        .footer {
+            background: linear-gradient(180deg, #0c1222 0%, #0a0f1c 100%);
+            color: #e5e7eb; /* light text */
+            border-top: 1px solid #1f2937;
+        }
+        .footer .footer-brand {
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+        .footer .footer-text,
+        .footer .contact-info li,
+        .footer .footer-link {
+            color: #94a3b8; /* slate-300 */
+        }
+        .footer .footer-link {
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+        .footer .footer-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.25s ease;
+        }
+        .footer .footer-link:hover { color: var(--primary-color); }
+        .footer .footer-link:hover::after { width: 100%; }
+
+        .footer .social-icons { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .footer .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid #334155; /* slate-700 */
+            color: #cbd5e1; /* slate-200 */
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+        .footer .social-icon:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+        .footer .social-icon:focus-visible {
+            outline: 3px solid rgba(194, 30, 37, 0.35);
+            outline-offset: 2px;
+        }
+
+        .footer .contact-info li i { color: var(--primary-color); }
+
+        .footer .newsletter-form .form-control {
+            background-color: #0f172a; /* slate-900 */
+            border-color: #1f2937; /* slate-800 */
+            color: #e5e7eb;
+        }
+        .footer .newsletter-form .form-control::placeholder { color: #94a3b8; }
+        .footer .newsletter-form .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(194, 30, 37, 0.2);
+            border-color: var(--primary-color);
+        }
+        .footer .newsletter-form .btn {
+            background: var(--primary-color);
+            border-color: var(--primary-dark);
+        }
+        .footer .newsletter-form .btn:hover { filter: brightness(0.95); }
+
+        .footer-divider { border-color: #1f2937; opacity: 0.6; }
+        .footer .copyright-text { color: #94a3b8; }
+
+        @media (max-width: 768px) {
+            .footer { text-align: center; }
+            .footer .social-icons { justify-content: center; }
+        }
     </style>
 </head>
 <body>
@@ -340,7 +421,42 @@
                 </div>
                 <div class="col-md-6">
                     <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/7DytVajpGjA" title="PASHA CEC Election" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <!-- Self-contained YouTube player with accessible, responsive thumbnail -->
+                        <div id="yt7DytVajpGjA" class="yt-player-wrap" data-video-id="7DytVajpGjA" data-open-external="true" role="group" aria-label="PASHA CEC Election video player">
+                          <div class="yt-thumb-layer" role="button" tabindex="0" aria-label="Play PASHA CEC Election video">
+                            <img
+                              class="yt-thumb-img"
+                              src="https://i.ytimg.com/vi/7DytVajpGjA/maxresdefault.jpg"
+                              srcset="https://i.ytimg.com/vi/7DytVajpGjA/hqdefault.jpg 480w, https://i.ytimg.com/vi/7DytVajpGjA/maxresdefault.jpg 1280w"
+                              sizes="(max-width: 576px) 100vw, (max-width: 992px) 50vw, 1280px"
+                              width="1280" height="720" alt="PASHA CEC Election video thumbnail"
+                              loading="lazy" decoding="async" fetchpriority="low">
+                            <span class="yt-play-overlay" aria-hidden="true" title="Play">
+                              <i class="fas fa-play"></i>
+                            </span>
+                          </div>
+                          <div class="yt-spinner visually-hidden" aria-hidden="true" aria-live="polite" title="Loading"></div>
+                          <div class="yt-error visually-hidden" role="alert" aria-live="assertive"></div>
+                        </div>
+
+                        <!-- Inline styles for the player block -->
+                        <style>
+                          .yt-player-wrap { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; background: #000; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+                          .yt-player-wrap > * { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+                          .yt-thumb-layer { display: flex; align-items: center; justify-content: center; cursor: pointer; outline: none; }
+                          .yt-thumb-img { width: 100%; height: 100%; object-fit: cover; transform-origin: center; transition: transform 0.3s ease, opacity 0.3s ease; }
+                          .yt-play-overlay { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; border-radius: 50%; background: rgba(0,0,0,0.55); color: #fff; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0,0,0,0.25); transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease; }
+                          .yt-play-overlay i { font-size: 28px; }
+                          .yt-thumb-layer:hover .yt-thumb-img, .yt-thumb-layer:focus .yt-thumb-img, .yt-thumb-layer:focus-visible .yt-thumb-img { transform: scale(1.03); opacity: 0.95; }
+                          .yt-thumb-layer:hover .yt-play-overlay, .yt-thumb-layer:focus .yt-play-overlay, .yt-thumb-layer:focus-visible .yt-play-overlay { transform: translate(-50%, -50%) scale(1.06); background: rgba(220,53,69,0.85); }
+                          .yt-thumb-layer:focus-visible { box-shadow: 0 0 0 4px rgba(220,53,69,0.4); }
+                          .yt-spinner::after { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.4); border-top-color: #fff; animation: yt-spin 0.9s linear infinite; }
+                          @keyframes yt-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+                          .yt-error { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); background: rgba(220,53,69,0.9); color: #fff; padding: 6px 10px; border-radius: 6px; font-size: 0.9rem; box-shadow: 0 6px 16px rgba(0,0,0,0.25); }
+                          @media (max-width: 576px) { .yt-play-overlay { width: 64px; height: 64px; } .yt-play-overlay i { font-size: 24px; } }
+                        </style>
+
+                        <!-- Player logic handled by global script at page bottom -->
                     </div>
                 </div>
             </div>
@@ -354,44 +470,70 @@
                 <!-- Manifesto Gallery Left Side -->
                 <div class="col-md-6 p-3 pe-md-5 border-end-md d-flex flex-column" id="manifesto">
                     <h2 class="section-title mb-4">Manifesto</h2>
+                    <style>
+                      /* Show only first 4 manifesto items on initial view */
+                      #manifesto .manifesto-list > a:nth-of-type(n+5) { display: none !important; }
+                    </style>
                     <div class="manifesto-list flex-grow-1">
-                        <a href="https://www.youtube.com/watch?v=_xe7In2Noj0" target="_blank" rel="noopener noreferrer" class="text-decoration-none" aria-label="Open Digital Transformation video on YouTube">
+                        <a href="https://www.youtube.com/watch?v=_xe7In2Noj0" target="_blank" rel="noopener noreferrer" class="text-decoration-none" aria-label="Open more work and always happy to help video on YouTube">
                             <div class="gallery-item">
                                 <span class="arrow">&#8594;</span>
-                                <img src="https://i.ytimg.com/vi/_xe7In2Noj0/hqdefault.jpg" alt="Digital Transformation" class="gallery-image" width="180" height="110" loading="eager" decoding="async" fetchpriority="high" onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27180%27 height=%27110%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e9ecef%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 fill=%27%23666%27 font-size=%2713%27%3EThumbnail unavailable%3C/text%3E%3C/svg%3E'; this.alt='Thumbnail unavailable';">
+                                <img src="https://i.ytimg.com/vi/_xe7In2Noj0/hqdefault.jpg" alt="more work and always happy to help" class="gallery-image" width="180" height="110" loading="eager" decoding="async" fetchpriority="high" onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27180%27 height=%27110%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e9ecef%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 fill=%27%23666%27 font-size=%2713%27%3EThumbnail unavailable%3C/text%3E%3C/svg%3E'; this.alt='Thumbnail unavailable';">
                                 <div class="gallery-text">
-                                    <div class="gallery-title">Digital Transformation</div>
+                                    <div class="gallery-title">More work and always happy to help</div>
                                     <div class="gallery-description">Driving innovation and efficiency across industries by integrating cutting-edge digital technologies.</div>
                                 </div>
                             </div>
                         </a>
-                        <a href="https://www.youtube.com/watch?v=dCkHhr4hS-E" target="_blank" rel="noopener noreferrer" class="text-decoration-none" aria-label="Open Cybersecurity for All video on YouTube">
+                        <!-- Added thumbnail for PASHA CEC Election video -->
+                        <a href="https://www.youtube.com/embed/7DytVajpGjA" target="_blank" rel="noopener noreferrer" class="text-decoration-none" aria-label="Open PASHA CEC Election video on YouTube">
                             <div class="gallery-item">
                                 <span class="arrow">&#8594;</span>
-                                <img src="https://i.ytimg.com/vi/dCkHhr4hS-E/hqdefault.jpg" alt="Cybersecurity for All" class="gallery-image" width="180" height="110" loading="lazy" decoding="async" fetchpriority="low" onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27180%27 height=%27110%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e9ecef%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 fill=%27%23666%27 font-size=%2713%27%3EThumbnail unavailable%3C/text%3E%3C/svg%3E'; this.alt='Thumbnail unavailable';">
+                                <img src="" data-video-id="7DytVajpGjA" alt="PASHA CEC Election" class="gallery-image yt-thumb" loading="lazy" decoding="async" fetchpriority="low">
                                 <div class="gallery-text">
-                                    <div class="gallery-title">Cybersecurity for All</div>
+                                    <div class="gallery-title">PASHA CEC Election</div>
+                                    <div class="gallery-description">Overview and message for the PASHA CEC Elections 2024.</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="https://www.youtube.com/embed/dCkHhr4hS-E" target="_blank" rel="noopener noreferrer" class="text-decoration-none" aria-label="Open Empowering Committees video on YouTube">
+                            <div class="gallery-item">
+                                <span class="arrow">&#8594;</span>
+                                <img src="" data-video-id="dCkHhr4hS-E" alt="Empowering Committees" class="gallery-image yt-thumb" loading="lazy" decoding="async" fetchpriority="low">
+                                <div class="gallery-text">
+                                    <div class="gallery-title">Empowering Committees</div>
                                     <div class="gallery-description">Strengthening digital defenses for businesses of all sizes, ensuring a secure and resilient digital ecosystem.</div>
                                 </div>
                             </div>
                         </a>
-                        <a href="https://www.youtube.com/watch?v=mwyotbr5WmM" target="_blank" rel="noopener noreferrer" class="text-decoration-none" aria-label="Open Talent Development video on YouTube">
+                        <a href="https://www.youtube.com/embed/mwyotbr5WmM" target="_blank" rel="noopener noreferrer" class="text-decoration-none" aria-label="Open Transparency and Open Communication video on YouTube">
                             <div class="gallery-item">
                                 <span class="arrow">&#8594;</span>
-                                <img src="https://i.ytimg.com/vi/mwyotbr5WmM/hqdefault.jpg" alt="Talent Development" class="gallery-image" width="180" height="110" loading="lazy" decoding="async" fetchpriority="low" onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27180%27 height=%27110%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e9ecef%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 fill=%27%23666%27 font-size=%2713%27%3EThumbnail unavailable%3C/text%3E%3C/svg%3E'; this.alt='Thumbnail unavailable';">
+                                <img src="" data-video-id="mwyotbr5WmM" alt="Transparency and Open Communication" class="gallery-image yt-thumb" loading="lazy" decoding="async" fetchpriority="low">
                                 <div class="gallery-text">
-                                    <div class="gallery-title">Talent Development</div>
+                                    <div class="gallery-title">Transparency and Open Communication</div>
                                     <div class="gallery-description">Nurturing the next generation of tech leaders through comprehensive training and mentorship programs.</div>
                                 </div>
                             </div>
                         </a>
-                        <a href="https://www.youtube.com/watch?v=C7K70m-IOX8" target="_blank" rel="noopener noreferrer" class="text-decoration-none" aria-label="Open Women in Tech video on YouTube">
+                        <a href="https://www.youtube.com/watch?v=C7K70m-IOX8" target="_blank" rel="noopener noreferrer" class="text-decoration-none" aria-label="Open Manifesto Point #4: Advocacy for IT Industry video on YouTube">
                             <div class="gallery-item">
                                 <span class="arrow">&#8594;</span>
-                                <img src="https://i.ytimg.com/vi/C7K70m-IOX8/hqdefault.jpg" alt="Women in Tech" class="gallery-image" width="180" height="110" loading="lazy" decoding="async" fetchpriority="low" onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27180%27 height=%27110%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e9ecef%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 fill=%27%23666%27 font-size=%2713%27%3EThumbnail unavailable%3C/text%3E%3C/svg%3E'; this.alt='Thumbnail unavailable';">
+                                <img src="https://i.ytimg.com/vi/C7K70m-IOX8/hqdefault.jpg" alt="Manifesto Point #4: Advocacy for IT Industry" class="gallery-image" width="180" height="110" loading="lazy" decoding="async" fetchpriority="low" onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27180%27 height=%27110%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e9ecef%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 fill=%27%23666%27 font-size=%2713%27%3EThumbnail unavailable%3C/text%3E%3C/svg%3E'; this.alt='Thumbnail unavailable';">
                                 <div class="gallery-text">
-                                    <div class="gallery-title">Women in Tech</div>
+                                    <div class="gallery-title"> Advocacy for IT Industry</div>
                                     <div class="gallery-description">Empowering and promoting female participation in the IT sector to foster diversity and innovation.</div>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- Added Manifesto Point #5: Community Engagement -->
+                        <a href="https://www.youtube.com/watch?v=1WxNdpz-Qps&t=1s" target="_blank" rel="noopener noreferrer" class="text-decoration-none" aria-label="Open Manifesto point # 5: Community Engagement video on YouTube">
+                            <div class="gallery-item">
+                                <span class="arrow">&#8594;</span>
+                                <img src="https://i.ytimg.com/vi/1WxNdpz-Qps/hqdefault.jpg" alt="Manifesto point # 5: Community Engagement" class="gallery-image" width="180" height="110" loading="lazy" decoding="async" fetchpriority="low" onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27180%27 height=%27110%27%3E%3Crect width=%27100%25%27 height=%27100%25%27 fill=%27%23e9ecef%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 fill=%27%23666%27 font-size=%2713%27%3EThumbnail unavailable%3C/text%3E%3C/svg%3E'; this.alt='Thumbnail unavailable';">
+                                <div class="gallery-text">
+                                    <div class="gallery-title"> Community Engagement</div>
+                                    <div class="gallery-description">Building strong community ties through active engagement, collaboration, and inclusive initiatives.</div>
                                 </div>
                             </div>
                         </a>
@@ -454,9 +596,19 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="vision-box">
                         <div class="video-container mb-3">
-                            <iframe src="https://www.youtube-nocookie.com/embed/ZK8uaB4ZYAI" title="Managing P@SHA Duties" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="yt-player-wrap" id="yt-ZK8uaB4ZYAI" data-video-id="ZK8uaB4ZYAI" role="group" aria-label="Managing P@SHA Duties video player">
+                                <div class="yt-thumb-layer" role="button" tabindex="0" aria-label="Play: How will you manage P@SHA duties with your professional responsibilities?">
+                                    <img class="yt-thumb-img" alt="Managing P@SHA Duties thumbnail" loading="lazy" decoding="async" fetchpriority="low"
+                                         src="https://i.ytimg.com/vi/ZK8uaB4ZYAI/hqdefault.jpg"
+                                         srcset="https://i.ytimg.com/vi/ZK8uaB4ZYAI/hqdefault.jpg 480w, https://i.ytimg.com/vi/ZK8uaB4ZYAI/sddefault.jpg 640w, https://i.ytimg.com/vi/ZK8uaB4ZYAI/maxresdefault.jpg 1280w"
+                                         sizes="(max-width: 576px) 480px, (max-width: 768px) 640px, 1280px" width="1280" height="720">
+                                    <span class="yt-play-overlay" aria-hidden="true" title="Play"><i class="fas fa-play"></i></span>
+                                </div>
+                                <div class="yt-spinner visually-hidden" aria-hidden="true" aria-live="polite" title="Loading"></div>
+                                <div class="yt-error visually-hidden" role="alert" aria-live="assertive"></div>
+                            </div>
                         </div>
-                        <h4> Responsibilities</h4>
+                        <h4>How will you manage P@SHA duties with your professional responsibilities?</h4>
                         <p>How will you manage P@SHA duties with your professional responsibilities?</p>
                     </div>
                 </div>
@@ -464,9 +616,19 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="vision-box">
                         <div class="video-container mb-3">
-                            <iframe src="https://www.youtube-nocookie.com/embed/4F-F1y-gLWo" title="Committee Alignment" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="yt-player-wrap" id="yt-4F-F1y-gLWo" data-video-id="4F-F1y-gLWo" role="group" aria-label="Specialized Committees Alignment video player">
+                                <div class="yt-thumb-layer" role="button" tabindex="0" aria-label="Play: How will you keep specialized committees aligned with P@SHA goals?">
+                                    <img class="yt-thumb-img" alt="Specialized Committees Alignment thumbnail" loading="lazy" decoding="async" fetchpriority="low"
+                                         src="https://i.ytimg.com/vi/4F-F1y-gLWo/hqdefault.jpg"
+                                         srcset="https://i.ytimg.com/vi/4F-F1y-gLWo/hqdefault.jpg 480w, https://i.ytimg.com/vi/4F-F1y-gLWo/sddefault.jpg 640w, https://i.ytimg.com/vi/4F-F1y-gLWo/maxresdefault.jpg 1280w"
+                                         sizes="(max-width: 576px) 480px, (max-width: 768px) 640px, 1280px" width="1280" height="720">
+                                    <span class="yt-play-overlay" aria-hidden="true" title="Play"><i class="fas fa-play"></i></span>
+                                </div>
+                                <div class="yt-spinner visually-hidden" aria-hidden="true" aria-live="polite" title="Loading"></div>
+                                <div class="yt-error visually-hidden" role="alert" aria-live="assertive"></div>
+                            </div>
                         </div>
-                        <h4>Committee Alignment</h4>
+                        <h4>How will you keep specialized committees aligned with P@SHA goals?</h4>
                         <p>How will you keep specialized committees aligned with P@SHA goals?</p>
                     </div>
                 </div>
@@ -474,9 +636,19 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="vision-box">
                         <div class="video-container mb-3">
-                            <iframe src="https://www.youtube-nocookie.com/embed/m-UJx0TfBQw" title="Open Communication" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="yt-player-wrap" id="yt-m-UJx0TfBQw" data-video-id="m-UJx0TfBQw" role="group" aria-label="Transparency and Communication video player">
+                                <div class="yt-thumb-layer" role="button" tabindex="0" aria-label="Play: How will you maintain open communication and transparency?">
+                                    <img class="yt-thumb-img" alt="Transparency and Communication thumbnail" loading="lazy" decoding="async" fetchpriority="low"
+                                         src="https://i.ytimg.com/vi/m-UJx0TfBQw/hqdefault.jpg"
+                                         srcset="https://i.ytimg.com/vi/m-UJx0TfBQw/hqdefault.jpg 480w, https://i.ytimg.com/vi/m-UJx0TfBQw/sddefault.jpg 640w, https://i.ytimg.com/vi/m-UJx0TfBQw/maxresdefault.jpg 1280w"
+                                         sizes="(max-width: 576px) 480px, (max-width: 768px) 640px, 1280px" width="1280" height="720">
+                                    <span class="yt-play-overlay" aria-hidden="true" title="Play"><i class="fas fa-play"></i></span>
+                                </div>
+                                <div class="yt-spinner visually-hidden" aria-hidden="true" aria-live="polite" title="Loading"></div>
+                                <div class="yt-error visually-hidden" role="alert" aria-live="assertive"></div>
+                            </div>
                         </div>
-                        <h4>Transparency</h4>
+                        <h4>How will you maintain open communication and transparency?</h4>
                         <p>How will you maintain open communication and transparency?</p>
                     </div>
                 </div>
@@ -484,9 +656,19 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="vision-box">
                         <div class="video-container mb-3">
-                            <iframe src="https://www.youtube-nocookie.com/embed/s1RiJv1zs5s" title="Event Participation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="yt-player-wrap" id="yt-s1RiJv1zs5s" data-video-id="s1RiJv1zs5s" role="group" aria-label="Event Participation video player">
+                                <div class="yt-thumb-layer" role="button" tabindex="0" aria-label="Play: How will you boost participation in P@SHA events and conferences?">
+                                    <img class="yt-thumb-img" alt="Event Participation thumbnail" loading="lazy" decoding="async" fetchpriority="low"
+                                         src="https://i.ytimg.com/vi/s1RiJv1zs5s/hqdefault.jpg"
+                                         srcset="https://i.ytimg.com/vi/s1RiJv1zs5s/hqdefault.jpg 480w, https://i.ytimg.com/vi/s1RiJv1zs5s/sddefault.jpg 640w, https://i.ytimg.com/vi/s1RiJv1zs5s/maxresdefault.jpg 1280w"
+                                         sizes="(max-width: 576px) 480px, (max-width: 768px) 640px, 1280px" width="1280" height="720">
+                                    <span class="yt-play-overlay" aria-hidden="true" title="Play"><i class="fas fa-play"></i></span>
+                                </div>
+                                <div class="yt-spinner visually-hidden" aria-hidden="true" aria-live="polite" title="Loading"></div>
+                                <div class="yt-error visually-hidden" role="alert" aria-live="assertive"></div>
+                            </div>
                         </div>
-                        <h4>Event Participation</h4>
+                        <h4>How will you boost participation in P@SHA events and conferences?</h4>
                         <p>How will you boost participation in P@SHA events and conferences?</p>
                     </div>
                 </div>
@@ -494,9 +676,19 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="vision-box">
                         <div class="video-container mb-3">
-                            <iframe src="https://www.youtube-nocookie.com/embed/IMc0Wlr8Zjs" title="Government Relations" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="yt-player-wrap" id="yt-IMc0Wlr8Zjs" data-video-id="IMc0Wlr8Zjs" role="group" aria-label="Government Relations video player">
+                                <div class="yt-thumb-layer" role="button" tabindex="0" aria-label="Play: How will you work with the government to secure favorable policies for P@SHA?">
+                                    <img class="yt-thumb-img" alt="Government Relations thumbnail" loading="lazy" decoding="async" fetchpriority="low"
+                                         src="https://i.ytimg.com/vi/IMc0Wlr8Zjs/hqdefault.jpg"
+                                         srcset="https://i.ytimg.com/vi/IMc0Wlr8Zjs/hqdefault.jpg 480w, https://i.ytimg.com/vi/IMc0Wlr8Zjs/sddefault.jpg 640w, https://i.ytimg.com/vi/IMc0Wlr8Zjs/maxresdefault.jpg 1280w"
+                                         sizes="(max-width: 576px) 480px, (max-width: 768px) 640px, 1280px" width="1280" height="720">
+                                    <span class="yt-play-overlay" aria-hidden="true" title="Play"><i class="fas fa-play"></i></span>
+                                </div>
+                                <div class="yt-spinner visually-hidden" aria-hidden="true" aria-live="polite" title="Loading"></div>
+                                <div class="yt-error visually-hidden" role="alert" aria-live="assertive"></div>
+                            </div>
                         </div>
-                        <h4>Government Relations</h4>
+                        <h4>How will you work with the government to secure favorable policies for P@SHA?</h4>
                         <p>How will you work with the government to secure favorable policies for P@SHA?</p>
                     </div>
                 </div>
@@ -504,9 +696,19 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="vision-box">
                         <div class="video-container mb-3">
-                            <iframe src="https://www.youtube-nocookie.com/embed/MDbZG3UjBDs" title="Strategic Balance" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="yt-player-wrap" id="yt-MDbZG3UjBDs" data-video-id="MDbZG3UjBDs" role="group" aria-label="Strategic Balance video player">
+                                <div class="yt-thumb-layer" role="button" tabindex="0" aria-label="Play: How will you balance immediate results with long-term strategies?">
+                                    <img class="yt-thumb-img" alt="Strategic Balance thumbnail" loading="lazy" decoding="async" fetchpriority="low"
+                                         src="https://i.ytimg.com/vi/MDbZG3UjBDs/hqdefault.jpg"
+                                         srcset="https://i.ytimg.com/vi/MDbZG3UjBDs/hqdefault.jpg 480w, https://i.ytimg.com/vi/MDbZG3UjBDs/sddefault.jpg 640w, https://i.ytimg.com/vi/MDbZG3UjBDs/maxresdefault.jpg 1280w"
+                                         sizes="(max-width: 576px) 480px, (max-width: 768px) 640px, 1280px" width="1280" height="720">
+                                    <span class="yt-play-overlay" aria-hidden="true" title="Play"><i class="fas fa-play"></i></span>
+                                </div>
+                                <div class="yt-spinner visually-hidden" aria-hidden="true" aria-live="polite" title="Loading"></div>
+                                <div class="yt-error visually-hidden" role="alert" aria-live="assertive"></div>
+                            </div>
                         </div>
-                        <h4>Strategic Balance</h4>
+                        <h4>How will you balance immediate results with long-term strategies?</h4>
                         <p>How will you balance immediate results with long-term strategies?</p>
                     </div>
                 </div>
@@ -514,9 +716,19 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="vision-box">
                         <div class="video-container mb-3">
-                            <iframe src="https://www.youtube-nocookie.com/embed/AuRrphbZuTE" title="Problem Solving" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="yt-player-wrap" id="yt-AuRrphbZuTE" data-video-id="AuRrphbZuTE" role="group" aria-label="Challenge Resolution video player">
+                                <div class="yt-thumb-layer" role="button" tabindex="0" aria-label="Play: Can you share a time when you personally solved a major challenge?">
+                                    <img class="yt-thumb-img" alt="Challenge Resolution thumbnail" loading="lazy" decoding="async" fetchpriority="low"
+                                         src="https://i.ytimg.com/vi/AuRrphbZuTE/hqdefault.jpg"
+                                         srcset="https://i.ytimg.com/vi/AuRrphbZuTE/hqdefault.jpg 480w, https://i.ytimg.com/vi/AuRrphbZuTE/sddefault.jpg 640w, https://i.ytimg.com/vi/AuRrphbZuTE/maxresdefault.jpg 1280w"
+                                         sizes="(max-width: 576px) 480px, (max-width: 768px) 640px, 1280px" width="1280" height="720">
+                                    <span class="yt-play-overlay" aria-hidden="true" title="Play"><i class="fas fa-play"></i></span>
+                                </div>
+                                <div class="yt-spinner visually-hidden" aria-hidden="true" aria-live="polite" title="Loading"></div>
+                                <div class="yt-error visually-hidden" role="alert" aria-live="assertive"></div>
+                            </div>
                         </div>
-                        <h4>Challenge Resolution</h4>
+                        <h4>Can you share a time when you personally solved a major challenge?</h4>
                         <p>Can you share a time when you personally solved a major challenge?</p>
                     </div>
                 </div>
@@ -524,9 +736,19 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="vision-box">
                         <div class="video-container mb-3">
-                            <iframe src="https://www.youtube-nocookie.com/embed/TAj5C2_Ne20" title="Member Concerns" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="yt-player-wrap" id="yt-TAj5C2_Ne20" data-video-id="TAj5C2_Ne20" role="group" aria-label="Member Concerns video player">
+                                <div class="yt-thumb-layer" role="button" tabindex="0" aria-label="Play: How will you prioritize and address concerns raised by P@SHA members?">
+                                    <img class="yt-thumb-img" alt="Member Concerns thumbnail" loading="lazy" decoding="async" fetchpriority="low"
+                                         src="https://i.ytimg.com/vi/TAj5C2_Ne20/hqdefault.jpg"
+                                         srcset="https://i.ytimg.com/vi/TAj5C2_Ne20/hqdefault.jpg 480w, https://i.ytimg.com/vi/TAj5C2_Ne20/sddefault.jpg 640w, https://i.ytimg.com/vi/TAj5C2_Ne20/maxresdefault.jpg 1280w"
+                                         sizes="(max-width: 576px) 480px, (max-width: 768px) 640px, 1280px" width="1280" height="720">
+                                    <span class="yt-play-overlay" aria-hidden="true" title="Play"><i class="fas fa-play"></i></span>
+                                </div>
+                                <div class="yt-spinner visually-hidden" aria-hidden="true" aria-live="polite" title="Loading"></div>
+                                <div class="yt-error visually-hidden" role="alert" aria-live="assertive"></div>
+                            </div>
                         </div>
-                        <h4>Member Concerns</h4>
+                        <h4>How will you prioritize and address concerns raised by P@SHA members?</h4>
                         <p>How will you prioritize and address concerns raised by P@SHA members?</p>
                     </div>
                 </div>
@@ -534,9 +756,19 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="vision-box">
                         <div class="video-container mb-3">
-                            <iframe src="https://www.youtube-nocookie.com/embed/PunzJAVaiHo" title="SMEs and Corporate Balance" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="yt-player-wrap" id="yt-PunzJAVaiHo" data-video-id="PunzJAVaiHo" role="group" aria-label="Business Balance video player">
+                                <div class="yt-thumb-layer" role="button" tabindex="0" aria-label="Play: How will you balance the needs of SMEs & Corporate?">
+                                    <img class="yt-thumb-img" alt="Business Balance thumbnail" loading="lazy" decoding="async" fetchpriority="low"
+                                         src="https://i.ytimg.com/vi/PunzJAVaiHo/hqdefault.jpg"
+                                         srcset="https://i.ytimg.com/vi/PunzJAVaiHo/hqdefault.jpg 480w, https://i.ytimg.com/vi/PunzJAVaiHo/sddefault.jpg 640w, https://i.ytimg.com/vi/PunzJAVaiHo/maxresdefault.jpg 1280w"
+                                         sizes="(max-width: 576px) 480px, (max-width: 768px) 640px, 1280px" width="1280" height="720">
+                                    <span class="yt-play-overlay" aria-hidden="true" title="Play"><i class="fas fa-play"></i></span>
+                                </div>
+                                <div class="yt-spinner visually-hidden" aria-hidden="true" aria-live="polite" title="Loading"></div>
+                                <div class="yt-error visually-hidden" role="alert" aria-live="assertive"></div>
+                            </div>
                         </div>
-                        <h4>Business Balance</h4>
+                        <h4>How will you balance the needs of SMEs & Corporate?</h4>
                         <p>How will you balance the needs of SMEs & Corporate?</p>
                     </div>
                 </div>
@@ -544,9 +776,19 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="vision-box">
                         <div class="video-container mb-3">
-                            <iframe src="https://www.youtube-nocookie.com/embed/bTI-FpWypUs" title="Academic Contribution" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="yt-player-wrap" id="yt-bTI-FpWypUs" data-video-id="bTI-FpWypUs" role="group" aria-label="Academic Sector video player">
+                                <div class="yt-thumb-layer" role="button" tabindex="0" aria-label="Play: How have you contributed to the academic sector?">
+                                    <img class="yt-thumb-img" alt="Academic Sector thumbnail" loading="lazy" decoding="async" fetchpriority="low"
+                                         src="https://i.ytimg.com/vi/bTI-FpWypUs/hqdefault.jpg"
+                                         srcset="https://i.ytimg.com/vi/bTI-FpWypUs/hqdefault.jpg 480w, https://i.ytimg.com/vi/bTI-FpWypUs/sddefault.jpg 640w, https://i.ytimg.com/vi/bTI-FpWypUs/maxresdefault.jpg 1280w"
+                                         sizes="(max-width: 576px) 480px, (max-width: 768px) 640px, 1280px" width="1280" height="720">
+                                    <span class="yt-play-overlay" aria-hidden="true" title="Play"><i class="fas fa-play"></i></span>
+                                </div>
+                                <div class="yt-spinner visually-hidden" aria-hidden="true" aria-live="polite" title="Loading"></div>
+                                <div class="yt-error visually-hidden" role="alert" aria-live="assertive"></div>
+                            </div>
                         </div>
-                        <h4>Academic Sector</h4>
+                        <h4>How have you contributed to the academic sector?</h4>
                         <p>How have you contributed to the academic sector?</p>
                     </div>
                 </div>
@@ -554,9 +796,19 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="vision-box">
                         <div class="video-container mb-3">
-                            <iframe src="https://www.youtube-nocookie.com/embed/-Xcpx4q7h_Q" title="Media Role" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <div class="yt-player-wrap" id="yt--Xcpx4q7h_Q" data-video-id="-Xcpx4q7h_Q" role="group" aria-label="Media Role video player">
+                                <div class="yt-thumb-layer" role="button" tabindex="0" aria-label="Play: What role have you played in the media for IT awareness?">
+                                    <img class="yt-thumb-img" alt="Media Role thumbnail" loading="lazy" decoding="async" fetchpriority="low"
+                                         src="https://i.ytimg.com/vi/-Xcpx4q7h_Q/hqdefault.jpg"
+                                         srcset="https://i.ytimg.com/vi/-Xcpx4q7h_Q/hqdefault.jpg 480w, https://i.ytimg.com/vi/-Xcpx4q7h_Q/sddefault.jpg 640w, https://i.ytimg.com/vi/-Xcpx4q7h_Q/maxresdefault.jpg 1280w"
+                                         sizes="(max-width: 576px) 480px, (max-width: 768px) 640px, 1280px" width="1280" height="720">
+                                    <span class="yt-play-overlay" aria-hidden="true" title="Play"><i class="fas fa-play"></i></span>
+                                </div>
+                                <div class="yt-spinner visually-hidden" aria-hidden="true" aria-live="polite" title="Loading"></div>
+                                <div class="yt-error visually-hidden" role="alert" aria-live="assertive"></div>
+                            </div>
                         </div>
-                        <h4>Media Role</h4>
+                        <h4>What role have you played in the media for IT awareness?</h4>
                         <p>What role have you played in the media for IT awareness?</p>
                     </div>
                 </div>
@@ -565,45 +817,60 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer py-5 bg-dark text-white">
+    <footer class="footer py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <h5 class="text-white mb-3">Munaf Majeed</h5>
-                    <p class="text-muted">Leading from the front for a brighter future in the IT industry.</p>
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="footer-brand mb-3">Muhammad Munaf Majeed</h5>
+                    <p class="footer-text">Inspiring growth, fostering leadership, and creating vision for a better tomorrow.</p>
                     <div class="social-icons mt-3">
-                        <a href="#" class="text-white me-3" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white me-3" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.linkedin.com/in/mohammadmunaf" class="text-white me-3" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://www.youtube.com/@muziqpaki" class="text-white" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.facebook.com/" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/in/mohammadmunaf" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/s4s.pk/" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/@muziqpaki" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <h5 class="text-white mb-3">Quick Links</h5>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-3">Quick Links</h5>
                     <ul class="list-unstyled">
-                        <li><a href="index.html" class="text-muted text-decoration-none">Home</a></li>
-                        <li><a href="#manifesto" class="text-muted text-decoration-none">Manifesto</a></li>
-                        <li><a href="#industry" class="text-muted text-decoration-none">Industry</a></li>
-                        <li><a href="#vision" class="text-muted text-decoration-none">Vision</a></li>
+                        <li><a href="index.html" class="footer-link">Home</a></li>
+                        <li><a href="#industry" class="footer-link">Industry Representation</a></li>
+                        <li><a href="#vision" class="footer-link">Vision</a></li>
                     </ul>
                 </div>
-                <div class="col-md-4">
-                    <h5 class="text-white mb-3">Contact</h5>
-                    <p class="text-muted">Email: munaf@s4scorp.com</p>
-                    <p class="text-muted">Phone: +92 300 1234567</p>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="mb-3">Contact Info</h5>
+                    <ul class="list-unstyled contact-info">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Karachi, Pakistan</li>
+                        <li><i class="fas fa-envelope me-2"></i> munaf@s4scorp.com</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="mb-3">Newsletter</h5>
+                    <p class="footer-text">Stay updated with my latest insights and events.</p>
+                    <form class="newsletter-form">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Your email" aria-label="Your email">
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <hr class="bg-secondary my-4">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <p class="mb-0 text-muted">&copy; 2024 Munaf Majeed. All Rights Reserved.</p>
-                </div>
-            </div>
+            
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="btn btn-danger rounded-circle back-to-top" aria-label="Back to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="../js/script.js"></script>
+    <script src="../js/gallery-new.js"></script>
     
     <script>
         // Function to handle scroll spy and active nav links
@@ -640,22 +907,25 @@
             // Update active section on scroll
             window.addEventListener('scroll', updateActiveLink);
 
-            // Smooth scrolling for navigation links
+            // Smooth scrolling for in-page hash links; allow normal navigation for others
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId !== '#') {
-                        const targetSection = document.querySelector(targetId);
-                        const headerOffset = 80; // Height of your fixed header
-                        const elementPosition = targetSection.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                        });
+                    const href = this.getAttribute('href') || '';
+                    if (!href.startsWith('#')) {
+                        // Not an in-page anchor; let the browser navigate (e.g., Home -> index.html)
+                        return;
                     }
+                    e.preventDefault();
+                    const targetSection = document.querySelector(href);
+                    if (!targetSection) return; // Gracefully skip if target missing
+                    const headerOffset = 80; // Height of your fixed header
+                    const elementPosition = targetSection.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
                 });
             });
         });
@@ -726,6 +996,241 @@
           };
           firstThumb.addEventListener('load', report('loaded'));
           firstThumb.addEventListener('error', report('failed'));
+        }
+      })();
+    </script>
+    <!-- YouTube Thumbnails Loader -->
+    <script src="../js/youtube-thumbnails.js"></script>
+    <script>
+      // YouTube players: interactive thumbnails + IFrame API (vision + hero)
+      (function(){
+        const cards = document.querySelectorAll('.yt-player-wrap[data-video-id]');
+        if (!cards.length) return;
+
+        let apiLoading = false;
+        let apiReadyResolvers = [];
+        function ensureApiScript(){
+          return new Promise((resolve, reject)=>{
+            if (window.YT && window.YT.Player) return resolve(window.YT);
+            apiReadyResolvers.push({resolve, reject});
+            if (!apiLoading){
+              apiLoading = true;
+              const s = document.createElement('script');
+              s.src='https://www.youtube.com/iframe_api';
+              s.async = true;
+              s.onerror = ()=>apiReadyResolvers.splice(0).forEach(({reject})=>reject(new Error('YouTube API failed')));
+              document.head.appendChild(s);
+              window.onYouTubeIframeAPIReady = function(){
+                const list = apiReadyResolvers.splice(0);
+                list.forEach(({resolve})=>resolve(window.YT));
+              };
+            }
+          });
+        }
+
+        function showSpinner(card, show){
+          const sp = card.querySelector('.yt-spinner');
+          if (sp) sp.classList.toggle('visually-hidden', !show);
+        }
+        function showError(card, msg){
+          const er = card.querySelector('.yt-error');
+          if (er){ er.textContent=msg; er.classList.remove('visually-hidden'); }
+        }
+        function clearError(card){
+          const er = card.querySelector('.yt-error');
+          if (er){ er.textContent=''; er.classList.add('visually-hidden'); }
+        }
+
+        function createIframeFallback(card, videoId, playerVars){
+          const params = new URLSearchParams();
+          params.set('autoplay','1');
+          params.set('rel','0');
+          params.set('modestbranding','1');
+          params.set('playsinline','1');
+          if (playerVars && playerVars.start) params.set('start', String(playerVars.start));
+          const src = `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+          const iframe = document.createElement('iframe');
+          iframe.src = src;
+          iframe.title = 'YouTube video player';
+          iframe.width='100%';
+          iframe.height='100%';
+          iframe.frameBorder='0';
+          iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+          iframe.allowFullscreen=true;
+          iframe.referrerPolicy='strict-origin-when-cross-origin';
+          iframe.loading='eager';
+          iframe.style.position='absolute';
+          iframe.style.top='0'; iframe.style.left='0'; iframe.style.width='100%'; iframe.style.height='100%';
+          card.appendChild(iframe);
+          showSpinner(card,false);
+        }
+
+        function initPlayer(card){
+          const vid = card.dataset.videoId;
+          if (!vid) return;
+          clearError(card);
+          showSpinner(card,true);
+          ensureApiScript().then(()=>{
+            try{
+              const playerVars = {
+                autoplay: 1,
+                rel: 0,
+                modestbranding: 1,
+                playsinline: 1
+              };
+              if (vid === 'ZK8uaB4ZYAI') playerVars.start = 1;
+
+              const player = new YT.Player(card, {
+                videoId: vid,
+                host: 'https://www.youtube.com',
+                playerVars,
+                events: {
+                  onReady: (e)=>{
+                    showSpinner(card,false);
+                    const iframe = player.getIframe();
+                    iframe.setAttribute('referrerpolicy','strict-origin-when-cross-origin');
+                    iframe.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                    iframe.setAttribute('sandbox','allow-scripts allow-same-origin allow-presentation');
+                    iframe.setAttribute('tabindex','0');
+                    iframe.focus({preventScroll:true});
+                  },
+                  onError: (ev)=>{
+                    showSpinner(card,false);
+                    let msg = 'Unable to load the video. Please try again.';
+                    switch(ev.data){
+                      case 2: msg='Invalid video parameter.'; break;
+                      case 5: msg='HTML5 player error.'; break;
+                      case 100: msg='Video not found or removed.'; break;
+                      case 101:
+                      case 150: msg='Playback restricted by the owner.'; break;
+                    }
+                    showError(card,msg);
+                    createIframeFallback(card, vid, playerVars);
+                  }
+                }
+              });
+            }catch(err){
+              showSpinner(card,false);
+              showError(card,'Failed to initialize player.');
+              createIframeFallback(card, vid);
+            }
+          }).catch(()=>{
+            showSpinner(card,false);
+            showError(card,'YouTube API failed to load.');
+            createIframeFallback(card, vid);
+          });
+        }
+
+        function attachInteractions(card){
+          const thumb = card.querySelector('.yt-thumb-layer');
+          if (!thumb) return;
+          const vid = card.dataset.videoId;
+          const externalOnly = card.dataset.openExternal === 'true';
+          const url = vid ? `https://www.youtube.com/watch?v=${vid}` : null;
+          let touchTimeout;
+          const activate = (keyboard)=>{
+            if (externalOnly && url){
+              window.open(url, '_blank', 'noopener');
+            } else {
+              initPlayer(card);
+              card.classList.add('playing');
+            }
+          };
+          thumb.addEventListener('click', (e)=>{ e.preventDefault(); activate(false); });
+          thumb.addEventListener('keydown', (e)=>{
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(true); }
+          });
+          thumb.addEventListener('touchstart', (e)=>{
+            touchTimeout = setTimeout(()=>{ activate(false); }, 0);
+          }, {passive:true});
+          thumb.addEventListener('touchend', ()=> clearTimeout(touchTimeout), {passive:true});
+        }
+
+        cards.forEach((card)=>{
+          // Keep inline player behavior on thumbnail
+          attachInteractions(card);
+
+          // Add external open behavior on title and card (outside player) for vision section only
+          const vid = card.dataset.videoId;
+          if (!vid) return;
+          const url = `https://www.youtube.com/watch?v=${vid}`;
+          const box = card.closest('.vision-box');
+          if (!box) return; // hero has no vision-box, skip external title/card clicks
+
+          // Make title a clickable link
+          const titleEl = box.querySelector('h4');
+          if (titleEl && !titleEl.querySelector('a')){
+            const a = document.createElement('a');
+            a.href = url;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            a.textContent = titleEl.textContent.trim();
+            titleEl.textContent = '';
+            titleEl.appendChild(a);
+          }
+
+          // Make the whole card clickable except the player area
+          box.style.cursor = 'pointer';
+          box.setAttribute('role','link');
+          box.setAttribute('tabindex','0');
+          box.addEventListener('click', (e)=>{
+            // If click is inside the player wrapper, let inline play handle it
+            if (card.contains(e.target)) return;
+            window.open(url, '_blank', 'noopener');
+          });
+          box.addEventListener('keydown', (e)=>{
+            if (e.key === 'Enter'){ window.open(url, '_blank', 'noopener'); }
+          });
+        });
+
+        if ('IntersectionObserver' in window){
+          const io = new IntersectionObserver((entries)=>{
+            entries.forEach((entry)=>{ if (entry.isIntersecting) { ensureApiScript(); io.disconnect(); } });
+          }, {rootMargin:'400px 0px'});
+          cards.forEach((card)=> io.observe(card));
+        }
+      })();
+    </script>
+    <script>
+      // Footer interactions: dynamic year, back-to-top, newsletter
+      (function(){
+        const yearEl = document.getElementById('footerYear');
+        if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+        const backBtn = document.getElementById('backToTop');
+        const backLink = document.getElementById('footerBackToTopLink');
+        const toggleBackBtn = () => {
+          if (!backBtn) return;
+          if (window.scrollY > 200) backBtn.classList.add('show');
+          else backBtn.classList.remove('show');
+        };
+        window.addEventListener('scroll', toggleBackBtn);
+        toggleBackBtn();
+        const scrollTopSmooth = (e) => {
+          if (e) e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+        if (backBtn) backBtn.addEventListener('click', scrollTopSmooth);
+        if (backLink) backLink.addEventListener('click', scrollTopSmooth);
+
+        const form = document.getElementById('newsletterForm');
+        const emailInput = document.getElementById('newsletterEmail');
+        const msg = document.getElementById('newsletterMsg');
+        const isValidEmail = (v) => /[^\s@]+@[^\s@]+\.[^\s@]+/.test(v);
+        if (form && emailInput && msg) {
+          form.addEventListener('submit', function(ev){
+            ev.preventDefault();
+            const email = emailInput.value.trim();
+            if (!isValidEmail(email)) {
+              msg.textContent = 'Please enter a valid email address.';
+              msg.className = 'text-danger';
+              return;
+            }
+            // Simulated subscribe success (no backend)
+            msg.textContent = 'Thank you! You\'re subscribed.';
+            msg.className = 'text-success';
+            emailInput.value = '';
+          });
         }
       })();
     </script>

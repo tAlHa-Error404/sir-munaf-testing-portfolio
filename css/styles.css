@@ -321,6 +321,34 @@
     object-fit: cover;
 }
 
+/* Headshot variant: keep upper framing in view for portraits */
+.achievement-image.headshot,
+.achievement-image.top-crop {
+    object-position: top center;
+}
+
+/* Resize the last two achievement cards for better visual balance */
+#achievements .achievement-pair:last-of-type .achievement-card {
+    height: 260px;
+}
+
+/* Mobile adjustments for the last two achievement cards */
+@media (max-width: 768px) {
+    #achievements .achievement-pair:last-of-type .achievement-card {
+        height: 180px;
+    }
+}
+
+/* Make linked unified cards behave like normal blocks without underline */
+.unified-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+.unified-card-link .unified-card:hover {
+    cursor: pointer;
+}
+
 .achievement-title {
     position: absolute;
     bottom: 0;
@@ -831,7 +859,7 @@ body {
     }
 }
 
-.video-background {
+.video-background, .image-background {
     position: absolute;
     top: 0;
     left: 0;
@@ -840,13 +868,13 @@ body {
     z-index: 1;
 }
 
-.video-background video {
+.video-background video, .image-background .hero-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.video-overlay {
+.video-overlay, .image-overlay {
     position: absolute;
     top: 0;
     left: 0;

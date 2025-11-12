@@ -1,0 +1,18 @@
+/* YouTube thumbnail styles */
+.yt-thumb {
+  display: block;
+  width: 180px; /* preserves current gallery layout */
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
+  background-color: #e9ecef;
+}
+.yt-thumb-loaded {
+  background-color: transparent;
+}
+.yt-thumb-fallback {
+  background-color: #e9ecef;
+}
+
